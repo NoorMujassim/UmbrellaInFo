@@ -6,83 +6,96 @@
   <title>noormujassim — Data Analyst Portfolio</title>
   <meta name="description" content="Noor Mujassim — Data Analyst. Excel, Python, MS SQL, Power BI, Tableau. Data cleaning, transformation, visualization." />
   <meta name="author" content="Noor Mujassim" />
+  <meta name="theme-color" content="#071027" />
+    <link rel="icon" href="assets/logo.svg" type="image/svg+xml">
 
   <!-- Simple, clean system font stack -->
   <style>
     :root{
-      --bg:#0f1724; --card:#0b1220; --muted:#9aa7bd; --accent:#4fd1c5; --accent-2:#7c5cff;
-      --glass: rgba(255,255,255,0.03);
-      --radius:12px;
-      --text: #e6eef6; --heading: #fff; --link: var(--accent-2);
-      --bg-gradient: linear-gradient(180deg,#071027 0%, #071425 60%);
-      font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-    }
-
-    [data-theme="light"] {
+      /* Default to light theme so content is readable before JS runs */
       --bg: #f6f8fa;
       --card: #fff;
       --muted: #4b5563;
       --accent: #4fd1c5;
       --accent-2: #7c5cff;
       --glass: rgba(0,0,0,0.03);
-      --text: #23272f;
-      --heading: #18181b;
-      --link: #7c5cff;
+      --radius:12px;
+      --text: #1f2937;
+      --heading: #0f1724;
+      --link: var(--accent-2);
       --bg-gradient: linear-gradient(180deg, #ffffff 0%, #f6f8fa 100%);
-      color-scheme: light;
-    }
-    /* light-mode card separation */
-    [data-theme="light"] .card{ box-shadow: 0 6px 18px rgba(16,24,40,0.04); border: 1px solid rgba(16,24,40,0.04); }
-  /* subtle dark-mode card lift */
-  :root .card{ box-shadow: 0 6px 18px rgba(2,6,23,0.35); }
-    /* focus for keyboard users */
-  a:focus, button:focus, .proj:focus{ outline:2px solid rgba(124,92,255,0.16); outline-offset:3px; }
-  /* theme-toggle micro-interactions */
-  #theme-toggle:hover{ transform:translateY(-2px); }
-  #theme-toggle:active{ transform:scale(0.96); }
-    /* smooth transitions for theme changes */
-    :root, body, .card, .modal .panel, .navlink, a.btn, .proj, .tag {
-      transition: background-color 240ms ease, color 240ms ease, box-shadow 240ms ease, border-color 240ms ease;
-    }
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    body{
-      margin:0; background:var(--bg-gradient); color:var(--text);
-      -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
-      line-height:1.45; padding:24px;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
     }
 
-    .container{max-width:1100px; margin:0 auto;}
+    /* Dark theme override */
+    [data-theme="dark"] {
+      --bg:#0f1724; --card:#0b1220; --muted:#9aa7bd; --accent:#4fd1c5; --accent-2:#7c5cff;
+      --glass: rgba(255,255,255,0.03);
+      --text: #e6eef6; --heading: #fff; --link: var(--accent-2);
+      --bg-gradient: linear-gradient(180deg,#071027 0%, #071425 60%);
+      color-scheme: dark;
+    }
+    /* Navigation & interactive buttons */
+    .navlink{
+      display:inline-block;
+      padding:8px 12px;
+      border-radius:8px;
+      color:var(--heading);
+      text-decoration:none;
+      font-weight:600;
+      transition:transform .15s ease, box-shadow .15s ease, background .15s ease, color .15s ease;
+      cursor:pointer;
+      border:1px solid transparent;
+    }
+    .navlink:hover,
+    .navlink:focus{
+      transform:translateY(-3px);
+      box-shadow:0 8px 20px rgba(2,6,23,0.08);
+      background:linear-gradient(90deg, var(--accent), var(--accent-2));
+      color:var(--bg);
+      outline: none;
+      border-color: transparent;
+    }
+    .navlink:focus-visible{ box-shadow: 0 0 0 4px rgba(124,92,255,0.12); }
 
-    header{
-      display:flex; align-items:center; justify-content:space-between;
-      gap:16px; margin-bottom:28px;
+    .btn{
+      display:inline-block;
+      padding:8px 14px;
+      border-radius:10px;
+      font-weight:700;
+      text-decoration:none;
+      background:linear-gradient(90deg, var(--accent), var(--accent-2));
+      color:var(--bg);
+      border: none;
+      cursor: pointer;
+      transition: transform .12s ease, box-shadow .12s ease, filter .12s ease;
+      box-shadow: 0 8px 26px rgba(124,92,255,0.08);
     }
-    .brand{
-      display:flex; align-items:center; gap:12px; text-decoration:none; color:inherit;
+    .btn:hover, .btn:focus{
+      transform: translateY(-4px) scale(1.02);
+      filter: brightness(1.03);
     }
-    .logo{
-      width:54px; height:54px; border-radius:12px; background:linear-gradient(135deg,var(--accent),var(--accent-2));
-      display:flex; align-items:center; justify-content:center; font-weight:700; font-size:18px; color:#051923;
-      box-shadow:0 6px 18px rgba(80,180,160,0.08), inset 0 -6px 18px rgba(255,255,255,0.06);
-    }
-    nav{display:flex; gap:14px; align-items:center; flex-wrap:wrap;}
-    a.btn{
-      color:var(--bg); background:linear-gradient(90deg,var(--accent),var(--accent-2)); padding:10px 14px; border-radius:10px;
-      text-decoration:none; font-weight:600; font-size:14px;
-    }
-    .navlink{color:var(--muted); text-decoration:none; padding:8px 10px; border-radius:8px;}
-    .navlink:hover{color:#fff; background:var(--glass)}
-  .navlink.active{ color:var(--link); font-weight:700; background:transparent; }
+    .btn:active{ transform: translateY(-1px) scale(0.995); }
+    .btn[disabled]{ opacity:0.6; cursor:not-allowed; transform:none; box-shadow:none; }
 
-    main{display:grid; grid-template-columns:1fr 360px; gap:28px; align-items:start;}
-    @media (max-width:900px){ main{grid-template-columns:1fr; } header{flex-direction:column; align-items:flex-start;} }
-
-    /* Hero */
-    .hero{
-      background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);
-      padding:28px; border-radius:var(--radius); box-shadow:0 6px 30px rgba(5,10,18,0.6);
+    /* Gradient pill variant for nav items (matches attached Download Resume style) */
+    .btn-gradient{
+      padding:8px 14px;
+      border-radius:18px;
+      background: linear-gradient(90deg, var(--accent) 0%, var(--accent-2) 100%);
+      color:var(--bg);
+      font-weight:700;
+      box-shadow: 0 8px 18px rgba(124,92,255,0.12);
+      border: none;
+      transition: transform .12s ease, box-shadow .12s ease, filter .12s ease, opacity .12s ease;
+      display:inline-flex; align-items:center; gap:8px;
     }
+    .navlink.btn-gradient{ color:var(--bg); }
+    .navlink.btn-gradient:hover,
+    .navlink.btn-gradient:focus{ transform:translateY(-3px); filter:brightness(1.02); box-shadow:0 10px 28px rgba(124,92,255,0.14); color:var(--bg); }
+    .navlink.btn-gradient:focus-visible{ box-shadow: 0 0 0 6px rgba(124,92,255,0.12); }
+  .icon{width:16px;height:16px;display:inline-block;vertical-align:middle}
+
     .hero h1{margin:0 0 8px; font-size:28px; letter-spacing:-0.4px;}
     .hero p.lead{margin:0 0 18px; color:var(--muted);}
     .chips{display:flex; gap:8px; flex-wrap:wrap; margin-bottom:16px;}
@@ -145,29 +158,82 @@
     .modal.open{display:flex;}
   .modal .panel{max-width:820px; width:100%; padding:20px; border-radius:12px; background:var(--card); color:var(--text);}
     .close{background:transparent; border:0; color:var(--muted); font-weight:700; cursor:pointer}
+      /* Page basics - ensure readable defaults */
+      body{background:var(--bg-gradient); color:var(--text); margin:0; -webkit-font-smoothing:antialiased;}
+      .container{max-width:980px; margin:36px auto; padding:20px;}
+      header{display:flex; align-items:center; justify-content:space-between; margin-bottom:18px}
+      .brand{display:flex; gap:12px; align-items:center; text-decoration:none; color:inherit}
+  /* Header utility classes to remove inline styles */
+      .brand-inner{display:flex; align-items:center; gap:12px}
+      .logo{width:54px; height:54px; border-radius:12px; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:18px; color:var(--heading); position:relative}
+      .sr-only{position:absolute; width:0; height:0; overflow:hidden; border:0; clip:rect(0 0 0 0); clip-path:inset(50%); white-space:nowrap}
+      .site-name{font-weight:700}
+      .tagline{margin-top:4px; font-size:13px}
+      .nav-primary{display:flex; align-items:center; gap:14px}
+      .theme-toggle{margin-left:10px; padding:8px 12px; border-radius:8px; border:none; cursor:pointer; background:var(--card); color:var(--muted); font-weight:600; box-shadow:0 1px 4px rgba(0,0,0,0.04); transition:transform 120ms ease}
+  /* Small spacing utilities */
+  .spacer-md{height:18px}
+  .spacer-sm{height:12px}
+  .mt-0{margin-top:0}
+  .mt-6{margin-top:6px}
+  .mt-8{margin-top:8px}
+  .mt-12{margin-top:12px}
+  .mt-14{margin-top:14px}
+  .mt-16{margin-top:16px}
+  .mt-32{margin-top:32px}
+  /* Contact form and small layout helpers */
+  #contact-form{margin-top:16px; display:flex; flex-direction:column; gap:10px}
+  .form-row{display:flex; gap:8px; align-items:center}
+  .contact-note{margin-top:12px; font-size:14px; color:var(--muted)}
+  /* Modal specific */
+  .modal-header{display:flex; align-items:center; justify-content:space-between; gap:10px; margin-bottom:8px}
+  #modal-tags{margin-top:12px; display:flex; gap:8px; flex-wrap:wrap}
+  .btn-outline{background:transparent; border:1px solid rgba(255,255,255,0.04); color:var(--accent);}
   </style>
 </head>
 <body>
+  <a href="#main-content" class="skip-link">Skip to content</a>
   <div class="container">
     <header>
       <a class="brand" href="#" aria-label="noormujassim home">
-        <img src="NoorMujassim.png" alt="Noor Mujassim Logo" class="logo" style="width:54px; height:54px; border-radius:12px; object-fit:cover; background:#fff;" />
-        <div>
-          <div style="font-weight:700">noormujassim</div>
-          <div class="muted" style="margin-top:4px; font-size:13px">Data Analytics • Excel · Python · Power BI · SQL · Tableau</div>
-        </div>
+        <!-- Inline logo: use initials so the header doesn't depend on an external image file -->
+        <div class="brand-inner">
+          <div class="logo" role="img" aria-label="Noor Mujassim logo">
+            <img src="assets/logo.svg" alt="NoorMujassim logo" class="sr-only" aria-hidden="true" />
+            <!-- Inline SVG logo: rounded square with a two-stop gradient and initials -->
+            <svg width="54" height="54" viewBox="0 0 54 54" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+              <title>Noor Mujassim logo</title>
+              <desc>Rounded square monogram with initials NM</desc>
+              <defs>
+                <linearGradient id="logo-grad" x1="0" y1="0" x2="1" y2="1">
+                  <!-- use CSS variables (defined on :root and overridden in [data-theme]) -->
+                  <stop offset="0%" stop-color="var(--accent, #4fd1c5)"/>
+                  <stop offset="100%" stop-color="var(--accent-2, #7c5cff)"/>
+                </linearGradient>
+              </defs>
+              <style>
+                /* ensure SVG text uses the page's custom properties for theme awareness */
+                text { fill: var(--heading, #051923); font-family: Inter, system-ui, Arial, sans-serif; font-weight:700; font-size:18px }
+              </style>
+              <rect width="54" height="54" rx="12" fill="url(#logo-grad)" />
+              <text x="50%" y="54%" dominant-baseline="middle" text-anchor="middle">NM</text>
+            </svg>
+          </div>
+          <div>
+            <div class="site-name">noormujassim</div>
+            <div class="muted tagline">Data Analytics • Excel · Python · Power BI · SQL · Tableau</div>
+          </div>
       </a>
-
-      <nav aria-label="Primary" style="display:flex;align-items:center;gap:14px;">
-        <a class="navlink" href="#about">About</a>
-        <a class="navlink" href="#projects">Projects</a>
-        <a class="navlink" href="#contact">Contact</a>
-        <a class="btn" href="https://drive.google.com/drive/folders/1DlMR4XpiUCnkqDk1gsa9W4Ocd5Oa9CwC?usp=sharing" target="_blank" rel="noopener">Download Resume</a>
-        <button id="theme-toggle" aria-label="Toggle dark/light mode" style="margin-left:10px;padding:8px 12px;border-radius:8px;border:none;cursor:pointer;background:var(--card);color:var(--muted);font-weight:600;box-shadow:0 1px 4px rgba(0,0,0,0.04);transition:transform 120ms ease;">🌙</button>
+      <nav aria-label="Primary" class="nav-primary">
+  <a class="navlink btn-gradient" href="#about">About <svg class="icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+  <a class="navlink btn-gradient" href="#projects">Projects <svg class="icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+  <a class="navlink btn-gradient" href="#contact">Contact <svg class="icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+  <a class="btn" href="https://drive.google.com/drive/folders/1DlMR4XpiUCnkqDk1gsa9W4Ocd5Oa9CwC?usp=sharing" target="_blank" rel="noopener">Download Resume <svg class="icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M12 3v12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M8 11l4 4 4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M21 21H3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark/light mode">☀️</button>
       </nav>
     </header>
 
-    <main>
+  <main id="main-content">
       <section>
         <!-- About Section -->
         <div class="card" id="about">
@@ -177,39 +243,39 @@
           <p>Let's connect and transform your data into a strategic asset! 🚀</p>
         </div>
 
-        <div style="height:18px"></div>
+  <div class="spacer-md"></div>
 
         <!-- Data Analytics Guide -->
         <div class="card" id="data-analytics">
-          <h2 style="margin-top:0">Data Analysis: Step-by-Step Guide</h2>
-          <ol style="margin-top:12px;">
+          <h2 class="mt-0">Data Analysis: Step-by-Step Guide</h2>
+          <ol class="mt-12">
             <li><b>Define the Objective</b><br>
               - Identify the problem or question.<br>
               - Determine key metrics (e.g., sales trends, customer behavior).</li>
-            <li style="margin-top:8px;"><b>Data Collection</b><br>
+            <li class="mt-8"><b>Data Collection</b><br>
               <i>Sources:</i> Databases (SQL, MongoDB), APIs (Google Analytics, Twitter API), Web Scraping (BeautifulSoup, Scrapy), Public Datasets (Kaggle, UCI).</li>
-            <li style="margin-top:8px;"><b>Data Cleaning</b><br>
+            <li class="mt-8"><b>Data Cleaning</b><br>
               - Handle missing values (drop or impute).<br>
               - Remove duplicates & outliers.<br>
               - Standardize formats (dates, text).</li>
-            <li style="margin-top:8px;"><b>Exploratory Data Analysis (EDA)</b><br>
+            <li class="mt-8"><b>Exploratory Data Analysis (EDA)</b><br>
               - Descriptive stats (mean, median).<br>
               - Visualize (histograms, scatter plots).<br>
               - Check correlations (heatmaps).</li>
-            <li style="margin-top:8px;"><b>Data Modeling</b><br>
+            <li class="mt-8"><b>Data Modeling</b><br>
               - Regression, Classification, Clustering.</li>
-            <li style="margin-top:8px;"><b>Interpretation & Insights</b><br>
+            <li class="mt-8"><b>Interpretation & Insights</b><br>
               - Identify trends & answer business questions.</li>
-            <li style="margin-top:8px;"><b>Visualization & Reporting</b><br>
+            <li class="mt-8"><b>Visualization & Reporting</b><br>
               - Dashboards (Tableau, Power BI), Reports (Excel, Google Data Studio).</li>
-            <li style="margin-top:8px;"><b>Decision-Making</b><br>
+            <li class="mt-8"><b>Decision-Making</b><br>
               - Implement insights in marketing, operations, etc.</li>
-            <li style="margin-top:8px;"><b>Monitoring & Improvement</b><br>
+            <li class="mt-8"><b>Monitoring & Improvement</b><br>
               - Track KPIs and update models with new data.</li>
           </ol>
 
-          <h3 style="margin-top:14px">Free Data Analysis Courses (With Certification)</h3>
-          <ol style="margin-top:8px;">
+          <h3 class="mt-14">Free Data Analysis Courses (With Certification)</h3>
+          <ol class="mt-8">
             <li><b>Google Data Analytics (Coursera)</b> — <a href="https://www.coursera.org/professional-certificates/google-data-analytics" target="_blank" rel="noopener">View course</a></li>
             <li><b>IBM Data Science Professional Certificate (Coursera)</b> — <a href="https://www.coursera.org/professional-certificates/ibm-data-science" target="_blank" rel="noopener">View course</a></li>
             <li><b>Kaggle Learn (Python & SQL)</b> — <a href="https://www.kaggle.com/learn" target="_blank" rel="noopener">Explore lessons</a></li>
@@ -220,9 +286,9 @@
 
         <!-- Skills Section (unchanged) -->
         <div class="card" aria-labelledby="skills-heading">
-          <h2 id="skills-heading" style="margin-top:0">Core skills</h2>
-          <p class="muted" style="margin-top:6px">Tools and techniques I use frequently</p>
-          <div class="skills" style="margin-top:12px">
+          <h2 id="skills-heading" class="mt-0">Core skills</h2>
+          <p class="muted mt-6">Tools and techniques I use frequently</p>
+          <div class="skills mt-12">
             <div class="skill">
               <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3 5h18v14H3z" stroke="currentColor" stroke-opacity="0.8" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
               <div class="meta"><b>Microsoft Excel</b><span class="muted">Power Query, PivotTables</span></div>
@@ -246,10 +312,10 @@
           </div>
         </div>
 
-        <div style="height:18px"></div>
+  <div class="spacer-md"></div>
 
         <!-- Projects section remains unchanged -->
-        <section id="projects" class="card">
+    <section id="projects" class="card">
           <h2 style="margin-top:0">Select Projects</h2>
           <p class="muted">Short descriptions. Click any card to read a summary and tools used.</p>
 
@@ -278,17 +344,17 @@
       </section>
 
       <!-- Contact Section -->
-      <section id="contact" class="card" style="margin-top:32px;">
+      <section id="contact" class="card mt-32">
         <h2>Contact Me</h2>
-        <form id="contact-form" style="margin-top:16px; display:flex; flex-direction:column; gap:10px;" onsubmit="submitContact(event)">
+  <form id="contact-form">
           <input id="name" class="input" type="text" placeholder="Your name" aria-label="Name" required />
           <input id="email" class="input" type="email" placeholder="Your email" aria-label="Email" required />
           <textarea id="message" class="input" rows="5" placeholder="Message" aria-label="Message" required></textarea>
-          <div style="display:flex; gap:8px; align-items:center;">
+          <div class="form-row">
             <button type="submit">Send message</button>
             <div id="form-response" class="muted" aria-live="polite"></div>
           </div>
-          <div style="margin-top:12px; font-size:14px; color:var(--muted);">Or email me directly: <a href="mailto:noormujassimraza@gmail.com">noormujassimraza@gmail.com</a></div>
+          <div class="contact-note">Or email me directly: <a href="mailto:noormujassimraza@gmail.com">noormujassimraza@gmail.com</a></div>
         </form>
       </section>
     </main>
@@ -309,14 +375,14 @@
   <!-- Modal for project details -->
   <div class="modal" id="modal" role="dialog" aria-modal="true" aria-hidden="true">
     <div class="panel" role="document">
-      <div style="display:flex; align-items:center; justify-content:space-between; gap:10px; margin-bottom:8px;">
+      <div class="modal-header">
         <h3 id="modal-title" style="margin:0">Project</h3>
         <button class="close" aria-label="Close" onclick="closeModal()">Close ✕</button>
       </div>
       <p id="modal-desc" class="muted"></p>
-      <div id="modal-tags" style="margin-top:12px; display:flex; gap:8px; flex-wrap:wrap"></div>
-      <div style="height:12px"></div>
-      <button class="btn" onclick="closeModal()" style="background:transparent; border:1px solid rgba(255,255,255,0.04); color:var(--accent);">Done</button>
+  <div id="modal-tags"></div>
+  <div class="spacer-sm"></div>
+  <button class="btn btn-outline" onclick="closeModal()">Done</button>
     </div>
   </div>
 
@@ -336,12 +402,15 @@
       if(theme === 'light') themeToggle.textContent = '☀️';
       else themeToggle.textContent = '🌙';
     }
-    // On load, set theme from localStorage or system preference
+    // On load, set theme from localStorage; default to light when not set
     (function(){
       const saved = localStorage.getItem('theme');
-      if(saved) setTheme(saved);
-      else if(window.matchMedia('(prefers-color-scheme: light)').matches) setTheme('light');
-      else setTheme('dark');
+      if(saved) {
+        setTheme(saved);
+      } else {
+        // Default to light for consistent appearance unless the user has saved a preference
+        setTheme('light');
+      }
     })();
     themeToggle.addEventListener('click', function(){
       const current = document.documentElement.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
@@ -352,8 +421,27 @@
     // utility
     document.getElementById('year').textContent = new Date().getFullYear();
 
-    // project modal
-    const modal = document.getElementById('modal');
-    const titleEl = document.getElementById('modal-title');
-    const descEl = document.getElementById('modal-desc');
-    const tagsEl = document.getElementBy
+  // project modal (handled in the main script at the end of the file)
+  // Enhance navlink focus/hover for keyboard users and add a tiny click accent for the resume button
+  (function(){
+    try{
+      const navlinks = Array.from(document.querySelectorAll('.navlink'));
+      navlinks.forEach(a=>{
+        a.addEventListener('keydown', (e)=>{
+          if(e.key === 'Enter' || e.key === ' ') a.click();
+        });
+      });
+
+      const resume = document.querySelector('.btn');
+      if(resume){
+        resume.addEventListener('click', (e)=>{
+          // tiny visual feedback: pulse the button then allow default
+          resume.animate([
+            { transform: 'scale(1)', boxShadow: getComputedStyle(resume).boxShadow },
+            { transform: 'scale(0.98)', boxShadow: '0 4px 12px rgba(0,0,0,0.06)' },
+            { transform: 'scale(1)', boxShadow: getComputedStyle(resume).boxShadow }
+          ], { duration: 260, easing: 'ease-out' });
+        });
+      }
+    }catch(err){ console.warn('nav enhancement failed', err); }
+  })();

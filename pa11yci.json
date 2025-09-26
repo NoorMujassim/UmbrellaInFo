@@ -1,0 +1,6 @@
+{
+  "defaults": {
+    "timeout": 300000
+  },
+  "urls": ["./index.html"]
+}

@@ -1,0 +1,38 @@
+name: Generate icons
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch: {}
+
+jobs:
+  generate-icons:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run convert-icons script
+        run: npm run convert-icons
+
+      - name: Commit generated icons
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add assets/umbrella-icon-192.png assets/umbrella-icon-512.png || true
+          if ! git diff --staged --quiet; then
+            git commit -m "chore: generate PNG icons from SVGs [ci skip]" || true
+            git push origin HEAD:main
+          else
+            echo "No icon changes"
+          fi

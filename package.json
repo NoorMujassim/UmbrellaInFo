@@ -1,0 +1,12 @@
+{
+  "name": "noormujassim-site",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "check-assets": "node ./scripts/check-assets.js",
+    "audit-a11y": "npx pa11y-ci --config=pa11yci.json || true"
+  },
+  "devDependencies": {
+    "pa11y-ci": "^6.0.0"
+  }
+}

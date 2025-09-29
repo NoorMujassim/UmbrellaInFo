@@ -1,0 +1,35 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Learn Tableau — Umbrella InFo</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <style>body{font-family:Inter,Roboto,Arial;margin:0;padding:24px;background:#f6f8fa}.card{max-width:900px;margin:18px auto;padding:18px;background:#fff;border-radius:12px}.enroll{display:inline-block;padding:12px 18px;background:#0057D9;color:#fff;border-radius:10px;text-decoration:none}.section{margin-top:18px}</style>
+</head>
+<body>
+  <div id="site-header"></div>
+  <div class="card">
+    <h1>Learn Tableau</h1>
+    <a class="enroll" href="#enroll">Enroll</a>
+    <div class="section"><h3>What you'll learn</h3><ul><li>Viz best practices</li><li>Dashboard design</li><li>Storytelling</li></ul></div>
+    <div class="section"><h3>Course duration / modules</h3><p>4 weeks — 6 modules</p></div>
+    <div class="section"><h3>Benefits / outcomes</h3><ul><li>Effective dashboards</li><li>Story-driven analysis</li></ul></div>
+    <div class="section"><h3>Testimonials / success stories</h3><blockquote>"Great clarity on viz" — F. Designer</blockquote></div>
+    <div class="section" id="enroll"><h3>Enroll</h3>
+      <form action="https://formsubmit.co/noormujassimraza@gmail.com" method="POST">
+        <input type="hidden" name="_subject" value="Enroll Learn Tableau">
+        <input type="text" name="name" placeholder="Your name" required style="padding:8px;margin-bottom:8px;width:100%">
+        <input type="email" name="email" placeholder="Email" required style="padding:8px;margin-bottom:8px;width:100%">
+        <textarea name="message" placeholder="Message (optional)" style="padding:8px;margin-bottom:8px;width:100%"></textarea>
+        <button class="enroll" type="submit">Enroll</button>
+      </form>
+    </div>
+  </div>
+  <div id="site-footer"></div>
+  <script>
+    async function loadInclude(id, path){try{const res=await fetch(path); if(res.ok){document.getElementById(id).innerHTML=await res.text()}}catch(e){console.warn('Include failed',path,e)}}
+    loadInclude('site-header','./_includes/header.html');
+    loadInclude('site-footer','./_includes/footer.html');
+  </script>
+</body>
+</html>

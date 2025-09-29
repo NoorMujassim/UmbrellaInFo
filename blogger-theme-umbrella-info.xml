@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<b:theme xmlns:b="http://www.google.com/2005/gml/b" version="2" name="Umbrella InFo (Embed)" id="UmbrellaInFo-embed">
+  <b:skin><![CDATA[
+    /* Minimal Blogger skin for Umbrella InFo embed + inlined page styles */
+    body{ margin:0; font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, Arial; background:#f6f8fa }
+    #header{ background: linear-gradient(90deg,#0057D9,#00C9A7); color:#fff; padding:18px }
+    #main-wrapper{ max-width:1200px; margin:18px auto; padding:0 16px }
+    .frame-wrap{ position:relative; padding-top:56.25%; /* 16:9 */ }
+    .frame-wrap iframe{ position:absolute; inset:0; width:100%; height:100%; border:0 }
+    @media (max-width:880px){ .frame-wrap{ padding-top:75% } }
+
+    /* Additional page styles moved from original site */
+    :root{ --bg: #f6f8fa; --card: #fff; --muted: #4b5563; --accent: #0057D9; --accent-2: #00C9A7; --highlight: #FFB100; --radius:12px; --text: #1f2937; --heading:#0f1724 }
+    html,body{height:100%; margin:0; font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, Arial; background:var(--bg); color:var(--text)}
+    .container{max-width:980px; margin:18px auto; padding:20px}
+    header{display:flex; align-items:center; justify-content:space-between}
+    .brand{display:flex; gap:12px; align-items:center; text-decoration:none; color:inherit}
+    .logo{width:54px; height:54px; border-radius:12px; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:18px; color:var(--heading);}
+    .muted{color:var(--muted)}
+    .card{background:var(--card); padding:18px; border-radius:12px; border:1px solid rgba(0,0,0,0.04); box-shadow:0 12px 30px rgba(2,6,23,0.04); margin-bottom:18px}
+    .skills{display:flex; gap:10px; flex-wrap:wrap}
+    .skill{background:linear-gradient(90deg, rgba(255,255,255,0.02), transparent); padding:10px 12px; border-radius:10px; display:flex; gap:10px; align-items:center; min-width:180px}
+    .proficiency{display:flex; gap:6px}
+    .proficiency .dot{width:10px; height:10px; border-radius:50%; background:rgba(0,0,0,0.08)}
+    .spacer-md{height:18px}
+    .frame-wrap{ width:100%; }
+  ]]></b:skin>
+
+  <b:template-skin>
+    <![CDATA[
+      <b:section id="header" class="header" maxwidgets="1" name="Header">
+        <b:widget id="Header1" locked="false" title="Umbrella InFo" type="Header">
+          <b:includable id="main">
+            <div id="header">
+              <h1 style="margin:0; font-size:20px">Umbrella InFo — Where Data Speaks</h1>
+            </div>
+          </b:includable>
+        </b:widget>
+      </b:section>
+
+      <b:section id="main" class="main" maxwidgets="1" name="Main">
+        <!-- HTML widget embedding the GitHub Pages site -->
+        <b:widget id="HTML1" locked="false" title="Umbrella InFo" type="HTML">
+          <b:includable id="main">
+            <div id="main-wrapper">
+              <div style="margin-bottom:14px; color:#334155">Embedded Umbrella InFo (hosted on GitHub Pages). If you prefer a native conversion, use the README in the repository.</div>
+              <div class="frame-wrap">
+  <div class="container">
+    <header>
+      <a class="brand" href="#">
+        <div class="logo" role="img" aria-label="Umbrella InFo logo">
+          <svg width="54" height="54" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <defs>
+              <linearGradient id="g1" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#0057D9"/><stop offset="100%" stop-color="#00C9A7"/></linearGradient>
+            </defs>
+            <rect x="0" y="0" width="120" height="120" rx="18" fill="url(#g1)" />
+            <text x="60" y="75" font-family="Inter, Arial" font-size="14" font-weight="700" fill="#fff" text-anchor="middle">Umbrella InFo</text>
+          </svg>
+        </div>
+        <div>
+          <div style="font-weight:700">Umbrella InFo</div>
+          <div class="muted">Where Data Speaks</div>
+        </div>
+      </a>
+      <nav>
+        <a href="#about">About</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="card" id="about">
+        <h1>Umbrella InFo</h1>
+        <p class="muted">Data analysis & visualization. Excel, Python, MS SQL, Power BI, Tableau.</p>
+      </section>
+
+      <section class="card">
+        <h2>Core skills</h2>
+        <div class="skills" aria-live="polite">
+          <div class="skill" data-score="4" tabindex="0"><div style="width:36px; height:36px; background:#217346; border-radius:6px"></div><div><b>Microsoft Excel</b><div class="muted">Power Query, PivotTables</div></div></div>
+          <div class="skill" data-score="4" tabindex="0"><div style="width:36px; height:36px; background:#3776ab; border-radius:6px"></div><div><b>Python</b><div class="muted">pandas, numpy</div></div></div>
+          <div class="skill" data-score="5" tabindex="0"><div style="width:36px; height:36px; background:#2b6cb0; border-radius:6px"></div><div><b>Microsoft SQL Server</b><div class="muted">T-SQL, ETL</div></div></div>
+          <div class="skill" data-score="5" tabindex="0"><div style="width:36px; height:36px; background:#f2c94c; border-radius:6px"></div><div><b>Power BI</b><div class="muted">Reports, DAX</div></div></div>
+          <div class="skill" data-score="3" tabindex="0"><div style="width:36px; height:36px; background:#e56a2f; border-radius:6px"></div><div><b>Tableau</b><div class="muted">Viz & dashboards</div></div></div>
+          <div class="skill" data-score="3" tabindex="0"><div style="width:36px; height:36px; background:#8b5cf6; border-radius:6px"></div><div><b>Power Apps</b><div class="muted">Canvas apps</div></div></div>
+          <div class="skill" data-score="2" tabindex="0"><div style="width:36px; height:36px; background:#d1495b; border-radius:6px"></div><div><b>Microsoft Access</b><div class="muted">Forms, Queries</div></div></div>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>Contact</h2>
+        <p class="muted">Email: <strong>noormujassimraza@gmail.com</strong></p>
+      </section>
+    </main>
+
+    <footer class="muted" style="text-align:center; margin-top:28px">© <span id="year">2025</span> Umbrella InFo</footer>
+  </div>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+    document.querySelectorAll('.skill[tabindex]').forEach(s=>{
+      s.addEventListener('focus', ()=> s.style.boxShadow='0 12px 30px rgba(2,6,23,0.08)');
+      s.addEventListener('blur', ()=> s.style.boxShadow='');
+    });
+  </script>
+            </div>
+          </b:includable>
+        </b:widget>
+      </b:section>
+
+      <b:section id="footer" class="footer" maxwidgets="1" name="Footer">
+        <b:widget id="Footer1" locked="false" title="Footer" type="HTML">
+          <b:includable id="main">
+            <div style="text-align:center; padding:18px; color:#94a3b8">© Umbrella InFo</div>
+          </b:includable>
+        </b:widget>
+      </b:section>
+    ]]>
+  </b:template-skin>
+
+</b:theme>

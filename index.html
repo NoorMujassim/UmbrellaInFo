@@ -3,18 +3,26 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <!-- Performance hints: preconnect to common analytics/fonts hosts (helps mobile warm-up) -->
+  <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <meta name="mobile-web-app-capable" content="yes">
   <title>Umbrella InFo — Where Data Speaks</title>
   <meta name="description" content="Umbrella InFo — Data analysis & visualization. Excel, Python, MS SQL, Power BI, Tableau. Where data speaks." />
   <meta name="author" content="Umbrella InFo" />
-  <meta name="theme-color" content="#0057D9" />
+  <meta name="theme-color" content="#A400FF" />
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="assets/favicon.svg">
-  <meta name="msapplication-TileColor" content="#0057D9">
+  <meta name="msapplication-TileColor" content="#A400FF">
   <!-- Platform icons (placeholders) -->
   <!-- Transparent 1x1 PNG used as placeholder; replace with proper 192/512 PNGs when available -->
   <link rel="icon" type="image/png" sizes="192x192" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR4nGNgYAAAAAMAASsJTYQAAAAASUVORK5CYII=">
   <link rel="icon" type="image/png" sizes="512x512" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR4nGNgYAAAAAMAASsJTYQAAAAASUVORK5CYII=">
-  <link rel="manifest" href="/manifest.json">
+  <link rel="manifest" href="manifest.json">
+  <!-- Fonts for contact card (Poppins / Montserrat as requested) -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <!-- Decorative script font used for CTA 'image-font' effect (small, safe import) -->
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
 
   <!-- Structured data (JSON-LD) -->
   <script type="application/ld+json">
@@ -29,17 +37,142 @@
   }
   </script>
 
+  <!-- Search Console verification: replace the content value with the token provided by Google Search Console -->
+  <meta name="google-site-verification" content="REPLACE_WITH_SEARCH_CONSOLE_TOKEN" />
+
+  <!-- Google Analytics (GA4) placeholder: set your Measurement ID here (format: G-XXXXXXX). The inline loader below will only run when this meta contains a valid ID. -->
+  <meta name="ga-measurement-id" content="G-54C41BRVDQ" />
+
+  <!-- Open Graph (Facebook, LinkedIn, Slack preview) -->
+  <meta property="og:title" content="Umbrella InFo — Where Data Speaks" />
+  <meta property="og:description" content="Umbrella InFo — Data analysis & visualization. Excel, Python, MS SQL, Power BI, Tableau. Where data speaks." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="assets/umbrella-logo.png" />
+  <meta property="og:site_name" content="Umbrella InFo" />
+  <!-- canonical (update to your published URL) -->
+  <link rel="canonical" href="./" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Umbrella InFo — Where Data Speaks" />
+  <meta name="twitter:description" content="Umbrella InFo — Data analysis & visualization. Excel, Python, MS SQL, Power BI, Tableau. Where data speaks." />
+  <meta name="twitter:image" content="assets/umbrella-logo.png" />
+  <meta name="twitter:site" content="@your_twitter_handle" />
+
+  <!-- Conditionally load Google Analytics (gtag) when a GA4 Measurement ID is set in the meta tag above. Respects simple privacy by enabling IP anonymization. -->
+  <!-- Google Analytics (GA4) loader is now consent-aware. The loader function below will only inject gtag when
+       the user grants analytics consent. Consent is persisted in localStorage under 'cookie_consent' with values
+       'granted' or 'denied'. This helps keep the single-file template GDPR/ privacy-friendly for static hosting. -->
+  <script>
+    (function(){
+    // Cookie consent / analytics preference manager
+    (function(){
+      try{
+        const banner = document.getElementById('cookie-consent');
+        const btnAccept = document.getElementById('cc-accept');
+        const btnDecline = document.getElementById('cc-decline');
+        const manage = document.getElementById('cc-manage');
+        if(!banner || !btnAccept || !btnDecline) return;
+
+        function showBanner(){ banner.style.display = ''; banner.setAttribute('aria-hidden','false'); banner.classList.add('visible'); banner.tabIndex = -1; // allow focus programmatically
+          // focus accept button for quick keyboard users
+          setTimeout(()=> btnAccept.focus(), 120);
+        }
+
+        function hideBanner(){ banner.style.display = 'none'; banner.setAttribute('aria-hidden','true'); }
+
+        function setConsent(value){ try{ localStorage.setItem('cookie_consent', value); }catch(e){} }
+
+        btnAccept.addEventListener('click', function(){ setConsent('granted'); hideBanner(); try{ if(window.loadGtag) window.loadGtag(); }catch(e){} });
+        btnDecline.addEventListener('click', function(){ setConsent('denied'); hideBanner(); });
+
+        // Manage link re-opens the banner so users can change their choice
+        if(manage){ manage.addEventListener('click', function(e){ e.preventDefault(); showBanner(); }); }
+
+        // show banner only when no consent recorded
+        try{
+          const stored = localStorage.getItem('cookie_consent');
+          if(!stored){ // show with a small delay to avoid interrupting page paint
+            setTimeout(showBanner, 800);
+          } else if(stored === 'granted'){
+            // ensure gtag is loaded if previously granted
+            setTimeout(()=> { try{ if(window.loadGtag) window.loadGtag(); }catch(e){} }, 200);
+          }
+        }catch(e){ /* ignore storage errors */ }
+
+        // Keyboard accessibility: allow Esc to close when visible
+        document.addEventListener('keydown', function(e){ if(e.key === 'Escape' && banner.getAttribute('aria-hidden') === 'false'){ hideBanner(); } });
+      }catch(e){ console.warn('cookie consent manager failed', e); }
+    })();
+      // Lightweight, reusable GA loader (does not auto-run).
+      window.__gtag_loaded = window.__gtag_loaded || false;
+      window.loadGtag = function(){
+        try{
+          const meta = document.querySelector('meta[name="ga-measurement-id"]');
+          if(!meta) return false;
+          const id = (meta.content||'').trim();
+          if(!id || id === 'G-XXXXXXXXXX' || !/^G-[A-Z0-9]{6,}$/i.test(id)) return false;
+          if(window.__gtag_loaded) return true;
+          // inject gtag script
+          const s = document.createElement('script'); s.async = true;
+          s.src = 'https://www.googletagmanager.com/gtag/js?id=' + encodeURIComponent(id);
+          document.head.appendChild(s);
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){ dataLayer.push(arguments); }
+          window.gtag = gtag;
+          gtag('js', new Date());
+          // anonymize IP for additional privacy
+          gtag('config', id, { 'anonymize_ip': true });
+          window.__gtag_loaded = true;
+          return true;
+        }catch(e){ console.warn('loadGtag failed', e); return false; }
+      };
+
+      // Auto-load when prior consent was given (persisted in localStorage)
+      try{
+        const consent = localStorage.getItem('cookie_consent');
+        if(consent === 'granted'){
+          // defer slightly so page visual load isn't blocked
+          setTimeout(()=>{ window.loadGtag(); }, 300);
+        }
+      }catch(e){ /* ignore storage errors */ }
+    })();
+  </script>
+
+  <!-- Cookie / analytics consent banner styles -->
+  <style>
+    #cookie-consent{ position:fixed; right:18px; left:18px; bottom:18px; z-index:140; background:var(--card); border-radius:12px; padding:14px 16px; box-shadow:0 18px 40px rgba(2,6,23,0.16); display:flex; gap:12px; align-items:center; justify-content:space-between; border:1px solid var(--sep); }
+    #cookie-consent .cc-copy{ flex:1; color:var(--text); font-size:14px }
+    #cookie-consent .cc-actions{ display:flex; gap:8px; align-items:center }
+    #cookie-consent .cc-btn{ padding:8px 12px; border-radius:8px; cursor:pointer; border:1px solid transparent; font-weight:700 }
+    #cookie-consent .cc-accept{ background:linear-gradient(90deg,var(--accent),var(--accent-2)); color:var(--bg) }
+    #cookie-consent .cc-decline{ background:transparent; color:var(--muted); border:1px solid rgba(0,0,0,0.06) }
+    #cookie-consent a.manage{ margin-left:8px; color:var(--muted); text-decoration:underline; font-weight:600 }
+    @media (min-width:980px){ #cookie-consent{ left:auto; right:24px; max-width:760px } }
+    @media (prefers-reduced-motion: reduce){ #cookie-consent{ transition:none } }
+  </style>
+
   <!-- Simple, clean system font stack -->
   <style>
     :root{
-      /* Default to light theme so content is readable before JS runs */
+      /* Default palette: adapted to requested purple -> cyan theme */
+      --brand: #7a00ff; /* primary brand purple (used for accents/backgrounds) */
+      --accent: #A400FF; /* gradient left (vivid purple) */
+      --accent-2: #00D4FF; /* gradient right (bright cyan) */
+      --neutral: #6b7280; /* neutral / muted color */
+
+      /* Backwards-compatible names used throughout the stylesheet */
       --bg: #f6f8fa;
       --card: #fff;
-      --muted: #4b5563;
-    --accent: #0057D9; /* primary deep blue */
-    --accent-2: #00C9A7; /* secondary teal/green */
-    --highlight: #FFB100; /* warm yellow/orange */
+      --muted: var(--neutral);
+  --accent-primary: var(--brand);
+
+  --highlight: #FFB100; /* warm yellow/orange (kept for small accents) */
       --glass: rgba(0,0,0,0.03);
+      /* separator color used for subtle borders in light theme; overridden in dark */
+      --sep: rgba(2,6,23,0.10);
+      /* warm tint that mixes with highlight for card borders in light theme */
+      --sep-warm: rgba(255,177,0,0.06);
       --radius:12px;
       --text: #1f2937;
       --heading: #0f1724;
@@ -50,8 +183,10 @@
 
     /* Dark theme override (brand colors below) */
     [data-theme="dark"] {
-      --bg:#121212; --card:#1a1a1a; --muted:#9aa7bd; --accent:#00C9A7; --accent-2:#0057D9;
+      --bg:#121212; --card:#1a1a1a; --muted:#9aa7bd; --accent:#A400FF; --accent-2:#00D4FF;
       --glass: rgba(255,255,255,0.03);
+  --sep: rgba(255,255,255,0.04);
+  --sep-warm: rgba(255,255,255,0.04);
       --text: #e6eef6; --heading: #fff; --link: var(--accent-2);
       --bg-gradient: linear-gradient(180deg,#121212 0%, #0f0f10 60%);
       color-scheme: dark;
@@ -68,6 +203,43 @@
       cursor:pointer;
       border:1px solid transparent;
     }
+    /* Contact CTA styles: pill-shaped, script font, purple->pink gradient with soft glow
+       Inspired by the attached banner: white cursive text, strong gradient and subtle shadow. */
+  .contact-ctas{ display:flex; gap:10px; margin-top:8px; flex-wrap:wrap; align-items:center }
+    .contact-cta{
+      display:inline-block;
+      padding:10px 18px;
+      border-radius:999px;
+      background: linear-gradient(90deg, var(--accent) 0%, #ff6fbf 100%);
+      color: #fff;
+      font-family: 'Pacifico', 'Montserrat', system-ui, -apple-system, 'Segoe UI', Roboto, Arial;
+      font-size:16px;
+      text-decoration:none;
+      box-shadow: 0 10px 28px rgba(164,0,255,0.18), 0 3px 10px rgba(0,0,0,0.12);
+      text-shadow: 0 2px 8px rgba(0,0,0,0.25);
+      transition: transform .14s ease, box-shadow .14s ease, filter .12s ease;
+      border: none;
+      line-height:1;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+    }
+    /* small decorative icons before CTA labels (uses emoji fallback to avoid external assets) */
+    .contact-cta::before{ display:inline-block; margin-right:8px }
+    .contact-cta[href^="tel:"]::before{ content:'📞' }
+    .contact-cta[href*="wa.me"]::before{ content:'💬' }
+    .contact-cta[href^="mailto:"]::before{ content:'✉️' }
+
+    /* Contact avatar wrap: center avatar and info in a compact vertical stack */
+    .contact-avatar-wrap{ display:flex; gap:12px; align-items:center }
+    .contact-avatar{ width:72px; height:72px; border-radius:12px; object-fit:cover; box-shadow: 0 8px 20px rgba(2,6,23,0.08) }
+    .contact-cta:focus{ outline: 3px solid rgba(164,0,255,0.12); outline-offset:3px }
+    .contact-cta:hover, .contact-cta:focus{
+      transform: translateY(-3px) scale(1.02);
+      box-shadow: 0 18px 50px rgba(164,0,255,0.22), 0 6px 20px rgba(0,0,0,0.18);
+      filter:brightness(1.03);
+    }
+    /* Slightly smaller variant when space is tight (keeps visual balance) */
+    .contact-ctas a.contact-cta.small{ padding:8px 12px; font-size:14px }
     .navlink:hover,
     .navlink:focus{
       transform:translateY(-3px);
@@ -92,6 +264,7 @@
       transition: transform .12s ease, box-shadow .12s ease, filter .12s ease;
   box-shadow: 0 8px 26px rgba(0,87,217,0.08);
     }
+    /* header-specific CTA styles consolidated into .nav-primary block above */
     .btn:hover, .btn:focus{
       transform: translateY(-4px) scale(1.02);
       filter: brightness(1.03);
@@ -115,8 +288,12 @@
     .navlink.btn-gradient:hover,
   .navlink.btn-gradient:focus{ transform:translateY(-3px); filter:brightness(1.02); box-shadow:0 10px 28px rgba(0,87,217,0.14); color:var(--bg); }
   .navlink.btn-gradient:focus-visible{ box-shadow: 0 0 0 6px rgba(0,87,217,0.12); }
+  /* Make <button class="navlink btn-gradient"> behave visually like anchor pills */
+  button.navlink.btn-gradient{ appearance:none; -webkit-appearance:none; border:none; padding:5px 10px; background: linear-gradient(90deg, var(--accent) 0%, var(--accent-2) 100%); color:var(--bg); display:inline-flex; align-items:center; gap:8px; border-radius:12px; min-height:36px; font-size:12px; line-height:1 }
   .icon{width:16px;height:16px;display:inline-block;vertical-align:middle}
   .icon{width:16px;height:16px;display:inline-block;vertical-align:middle;margin-right:8px}
+  /* small icon shown next to section headings */
+  .section-icon{width:20px;height:20px;display:inline-block;vertical-align:middle;margin-right:10px;flex:0 0 20px}
   /* Ensure inline CTA icons stay visible on dark theme */
   [data-theme="dark"] .icon { filter: drop-shadow(0 1px 0 rgba(0,0,0,0.2)); }
   /* Skill proficiency dots (5-step) */
@@ -137,23 +314,57 @@
     .stat p{margin:6px 0 0; color:var(--muted); font-size:13px;}
 
     /* Skills & projects */
-  .card{background:var(--card); padding:18px; border-radius:12px;}
+  /* JS-enabled reveal: cards (uses transition by default). When `.use-scale` is set on <html>, a keyframe scale+fade is used instead. */
+  .reveal-enabled .card{background:var(--card); padding:18px; border-radius:12px; border:1px solid var(--sep-warm); box-shadow: 0 14px 40px rgba(2,6,23,0.08);
+    /* entrance animation starting state (only when JS-enabled) */
+    opacity:0; transform:translateY(12px) scale(.995); transition: opacity .42s cubic-bezier(.2,.9,.3,1), transform .42s cubic-bezier(.2,.9,.3,1); will-change: opacity, transform;
+  }
+
+  /* Keyframe alternative: gentle scale + fade (used when developer toggles `.use-scale` on <html>) */
+  @keyframes fadeScaleIn {
+    from { opacity: 0; transform: translateY(8px) scale(.98); }
+    to   { opacity: 1; transform: translateY(0) scale(1); }
+  }
+  /* apply keyframe when `.use-scale` is present on the root */
+  .reveal-enabled.use-scale .card.in-view{ animation: fadeScaleIn 520ms cubic-bezier(.22,.98,.35,1) both; }
   /* Make project sections feel like a unified 'Select Projects' area */
   .card h2{font-size:20px; margin-bottom:6px; color:var(--heading); letter-spacing:-0.2px}
   .card p.muted{margin-bottom:8px}
   /* Subtle separators and breathing room between stacked project cards */
-  .card + .card{margin-top:18px; border-top:1px solid rgba(2,6,23,0.04); padding-top:18px}
+  .card + .card{margin-top:18px; border-top:1px solid var(--sep); padding-top:18px}
   /* Slightly larger project title within cards for emphasis */
   .proj h4{font-size:15px; font-weight:700; color:var(--heading); margin-bottom:6px}
   /* Light background band between project entries to improve scanability */
-  .projects .proj{background:transparent; padding:14px; border-radius:8px}
-  .projects .proj + .proj{border-top:1px solid rgba(2,6,23,0.03); padding-top:12px; margin-top:12px}
+  .projects .proj{background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent); padding:14px; border-radius:8px; border:1px solid transparent; transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease;}
+    .projects .proj + .proj{border-top:1px solid var(--sep); padding-top:12px; margin-top:12px}
+    .projects .proj:hover{transform:translateY(-6px) scale(1.01); box-shadow: 0 18px 44px rgba(2,6,23,0.12); border-color: rgba(0,87,217,0.06);} 
+
+  /* reveal state applied when card is visible in viewport */
+  .card.in-view{ opacity:1; transform:translateY(0) scale(1); }
     .skills{display:flex; gap:10px; flex-wrap:wrap;}
     .skill{
       background:linear-gradient(90deg, rgba(255,255,255,0.02), transparent);
       padding:10px 12px; border-radius:10px; display:flex; gap:10px; align-items:center;
-        min-width:180px;
+      min-width:180px; cursor:default; transition:transform .15s ease, box-shadow .15s ease, border-color .15s ease, background-color .15s ease; outline: none;
     }
+    /* highlight on hover and focus for accessibility */
+    .skill:hover,
+    .skill:focus,
+    .skill:focus-visible{
+      transform: translateY(-4px);
+      box-shadow: 0 12px 30px rgba(2,6,23,0.10), 0 4px 10px rgba(0,0,0,0.06);
+      border:1px solid rgba(0,87,217,0.14);
+      background: linear-gradient(180deg, rgba(0,87,217,0.02), transparent 60%);
+    }
+    .skill:focus-visible{ box-shadow: 0 0 0 6px rgba(0,87,217,0.06); }
+    /* left accent bar when highlighted */
+    .skill:hover::before,
+    .skill:focus::before,
+    .skill:focus-visible::before{
+      content: '';
+      width:4px; height:60%; border-radius:3px; background:var(--accent,#0057D9); margin-right:8px; display:block; flex:0 0 4px;
+    }
+    @media (prefers-reduced-motion: reduce){ .skill:hover,.skill:focus,.skill:focus-visible{ transform:none; } }
       .skill .skill-icon{width:36px;height:36px;flex:0 0 36px;border-radius:8px}
       .skill .meta{display:flex; flex-direction:column}
       /* Edit skills toggle */
@@ -173,9 +384,12 @@
     .skill .meta{font-size:13px}
   .skill .meta b{display:block; color:var(--heading); font-weight:700}
 
-    .projects{display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:12px; margin-top:12px;}
-    .proj{padding:12px; border-radius:10px; background:rgba(255,255,255,0.02); cursor:pointer; transition:transform .18s ease;}
-    .proj:hover{transform:translateY(-6px)}
+  .projects{display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:12px; margin-top:12px;}
+  .reveal-enabled .proj{padding:12px; border-radius:10px; background:rgba(255,255,255,0.02); cursor:pointer; opacity:0; transform:translateY(8px); transition:opacity .38s cubic-bezier(.2,.9,.3,1), transform .38s cubic-bezier(.2,.9,.3,1), box-shadow .18s ease;}
+  .proj.in-view{ opacity:1; transform:translateY(0); }
+  /* keyframe variant for project tiles */
+  .reveal-enabled.use-scale .proj.in-view{ animation: fadeScaleIn 420ms cubic-bezier(.22,.98,.35,1) both; }
+  .proj:hover{transform:translateY(-6px)}
     .proj h4{margin:0 0 6px; font-size:15px;}
     .proj p{margin:0; color:var(--muted); font-size:13px;}
   .proj-actions{margin-top:10px; display:flex; gap:8px}
@@ -184,12 +398,248 @@
   .proj-icon{display:inline-flex; align-items:center; gap:6px; margin-left:8px; text-decoration:none; padding:4px; border-radius:8px}
   .proj-icon .icon{width:14px; height:14px}
   .proj-icon:focus{outline:2px solid rgba(0,87,217,0.12)}
-    .tags{display:flex; gap:8px; flex-wrap:wrap; margin-top:8px;}
-    .tag{font-size:12px; color:var(--muted); background:rgba(255,255,255,0.02); padding:6px 8px; border-radius:999px}
+  /* Accessible focus indicators for cards and projects */
+  .card:focus-within, .card:focus-visible {
+    outline: none;
+    border-color: rgba(0,87,217,0.14);
+    box-shadow: 0 0 0 6px rgba(0,87,217,0.06);
+  }
+  .proj:focus, .proj:focus-visible, .proj:focus-within{
+    outline: none;
+    border:1px solid rgba(0,87,217,0.12);
+    box-shadow: 0 8px 20px rgba(2,6,23,0.06);
+  }
 
-    /* Aside / Contact */
-    aside{position:sticky; top:24px;}
+  /* Project detail modal (accessible) */
+  .project-modal{position:fixed; inset:0; display:none; align-items:center; justify-content:center; background:rgba(2,6,23,0.6); z-index:1200; padding:20px}
+  .project-modal.show{display:flex}
+  .project-modal .modal-card{background:var(--card); width:min(860px,96%); border-radius:12px; padding:20px; box-shadow:0 20px 60px rgba(2,6,23,0.4); max-height:90vh; overflow:auto}
+  .project-modal .modal-header{display:flex; align-items:center; justify-content:space-between; gap:12px}
+  .project-modal .modal-title{font-size:20px; margin:0; color:var(--heading)}
+  .project-modal .modal-body{margin-top:12px; color:#374151; font-size:15px; line-height:1.6}
+  .project-modal .modal-tags{margin-top:12px; display:flex; gap:8px; flex-wrap:wrap}
+  .project-modal .modal-tags .tag{background:#f1f5f9; padding:6px 10px; border-radius:8px; font-size:13px; color:#374151}
+  .project-modal .modal-close{background:transparent; border:0; font-size:18px; cursor:pointer; padding:8px; border-radius:8px}
+  .project-modal .modal-footer{margin-top:16px; text-align:right}
+  .project-modal .modal-footer .btn{background:var(--accent); color:#fff; padding:8px 12px; border-radius:8px; text-decoration:none}
+  @media (max-width:640px){ .project-modal .modal-card{padding:14px} .project-modal .modal-title{font-size:18px} }
+
+  /* Responsive modal iframe sizing (Calendly) */
+  #projectModal .modal-body iframe{ width:100%; height:min(80vh,520px); border:0; display:block }
+
+
+  /* --- Category card style (matches attached mock) --- */
+  /* Make the category container visually a single white card with stacked project rows */
+  #powerbi-projects .projects,
+  #advanced-excel-projects .projects,
+  #python-projects .projects,
+  #sql-projects .projects,
+  #tableau-projects .projects,
+  #powerquery-projects .projects {
+    display:block; /* stack rows vertically */
+    background: #fff; /* white card */
+    border-radius: 12px;
+    padding: 18px;
+    box-shadow: 0 10px 30px rgba(2,6,23,0.06);
+    border: 1px solid rgba(15,23,42,0.04);
+    color: var(--heading);
+  }
+
+  /* Each project row inside the white card */
+  #powerbi-projects .projects .proj,
+  #advanced-excel-projects .projects .proj,
+  #python-projects .projects .proj,
+  #sql-projects .projects .proj,
+  #tableau-projects .projects .proj,
+  #powerquery-projects .projects .proj {
+    background: transparent; /* remove inner gradient */
+    border: none;
+    padding: 16px 10px;
+    border-radius: 8px;
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+  }
+
+  /* Row layout: title line with action on the right */
+  #powerbi-projects .projects .proj h4,
+  #advanced-excel-projects .projects .proj h4,
+  #python-projects .projects .proj h4 {
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:12px;
+    font-size:16px;
+    margin:0;
+    color:var(--heading);
+  }
+
+  /* Title left, small plus icon button on the right */
+  #powerbi-projects .projects .proj .proj-icon,
+  #advanced-excel-projects .projects .proj .proj-icon,
+  #python-projects .projects .proj .proj-icon {
+    background: rgba(0,87,217,0.06);
+    border-radius:8px;
+    padding:6px;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    text-decoration:none;
+    color:var(--accent);
+  }
+
+  /* Light divider between project rows (except last) */
+  #powerbi-projects .projects .proj + .proj,
+  #advanced-excel-projects .projects .proj + .proj,
+  #python-projects .projects .proj + .proj {
+  border-top:1px solid var(--sep);
+    margin-top:10px;
+    padding-top:14px;
+  }
+
+  /* Project description style */
+  #powerbi-projects .projects .proj p,
+  #advanced-excel-projects .projects .proj p,
+  #python-projects .projects .proj p {
+  margin:0; color:var(--muted); font-size:14px; line-height:1.45;
+  }
+
+  /* Make the whole card clickable/focusable for keyboard users */
+  #powerbi-projects .projects .proj[tabindex],
+  #advanced-excel-projects .projects .proj[tabindex],
+  #python-projects .projects .proj[tabindex] {
+    cursor: pointer;
+  }
+
+  /* Ensure mobile friendliness */
+  @media (max-width:880px){
+    #powerbi-projects .projects,
+    #advanced-excel-projects .projects,
+    #python-projects .projects { padding:14px }
+  }
+
+  /* subtle decorative gradient behind cards to match presentation look */
+  /* Make the whole category section itself a unified white card so headers sit inside the card */
+  #powerbi-projects,
+  #advanced-excel-projects,
+  #python-projects,
+  #sql-projects,
+  #tableau-projects,
+  #powerquery-projects {
+    position:relative;
+    background:var(--card);
+    border-radius:14px;
+    padding:18px;
+    box-shadow: 0 18px 40px rgba(2,6,23,0.06);
+    border:1px solid rgba(15,23,42,0.06);
+    margin-top:18px;
+  }
+  /* gradient band behind the white card (subtle, placed on the section) */
+  #powerbi-projects::before,
+  #advanced-excel-projects::before,
+  #python-projects::before,
+  #sql-projects::before,
+  #tableau-projects::before,
+  #powerquery-projects::before {
+    content: '';
+    position: absolute;
+    left: 18px;
+    right: 18px;
+    top: 12px;
+    height: 56px;
+    border-radius: 12px;
+    background: linear-gradient(135deg,#667eea 0%, #764ba2 100%);
+    opacity: 0.06;
+    z-index: 0;
+    pointer-events:none;
+  }
+  /* ensure internal projects container sits above decorative band */
+  #powerbi-projects .projects,
+  #advanced-excel-projects .projects,
+  #python-projects .projects,
+  #sql-projects .projects,
+  #tableau-projects .projects,
+  #powerquery-projects .projects { z-index:1; position:relative; background:transparent; padding:8px 0 0 0; }
+
+  /* thumbnail inserted at left of each project row */
+  .proj-thumb{width:72px;height:54px;border-radius:8px;flex:0 0 72px;background:linear-gradient(135deg,#eef2ff,#f0f7ff);display:inline-block;margin-right:12px;align-self:center;overflow:hidden}
+  .proj-row{display:flex;align-items:flex-start;gap:12px}
+  .proj-row .proj-content{flex:1}
+
+  /* thumbnail badge (small tech icon) */
+  .proj-thumb{position:relative}
+  .thumb-badge{position:absolute; bottom:8px; left:8px; display:inline-flex; align-items:center; justify-content:center; min-width:28px; height:28px; padding:0 8px; border-radius:8px; font-weight:700; font-size:12px; color:#fff; box-shadow: 0 8px 20px rgba(2,6,23,0.12);}
+  .thumb-badge.dark-text{ color:#07203a }
+
+  /* multiple small tech icons stacked in thumbnail */
+  .thumb-icons{position:absolute; bottom:8px; left:8px; display:flex; gap:6px; align-items:center; z-index:2}
+  .thumb-icons .tech-icon{width:28px; height:20px; border-radius:6px; display:inline-flex; align-items:center; justify-content:center; box-shadow:0 8px 18px rgba(2,6,23,0.10); overflow:hidden}
+  .thumb-icons .tech-icon svg{width:18px; height:18px; display:block}
+
+  /* modal icons row */
+  .modal-icons{display:flex; gap:8px; margin-top:8px}
+  .modal-icons .tech-icon{width:36px; height:28px; border-radius:8px}
+
+  /* Make the details pill clearer */
+  .proj-icon{display:inline-flex;align-items:center;gap:8px;padding:6px 10px;border-radius:999px;background:transparent;border:1px solid rgba(0,87,217,0.08);color:var(--accent);font-weight:700;text-decoration:none}
+  .proj-icon span{font-size:13px}
+  .tags{display:flex; gap:8px; flex-wrap:wrap; margin-top:8px; perspective:900px;}
+  .tag{font-size:12px; color:var(--muted); background:rgba(255,255,255,0.02); padding:6px 8px; border-radius:999px; display:inline-block; transition: transform 260ms cubic-bezier(.2,.9,.3,1), box-shadow 260ms cubic-bezier(.2,.9,.3,1), background 200ms ease, color 200ms ease; transform-origin: center; will-change: transform, box-shadow;}
+  /* 3D hover/focus - lift and slight tilt for depth */
+  .tag:hover, .tag:focus{ transform: translateY(-8px) rotateX(6deg) scale(1.03); box-shadow: 0 20px 40px rgba(2,6,23,0.12); background: linear-gradient(90deg, rgba(0,87,217,0.06), rgba(0,201,167,0.04)); color: var(--heading); border: 1px solid rgba(0,87,217,0.08); }
+  .tag:active{ transform: translateY(-2px) rotateX(2deg) scale(0.995); box-shadow:0 8px 18px rgba(2,6,23,0.08); }
+  .tag:focus-visible{ outline: none; box-shadow: 0 20px 40px rgba(2,6,23,0.12), 0 0 0 6px rgba(0,87,217,0.06); }
+
+  /* Aside / Contact */
+  aside{position:sticky; top:24px; transition: transform .22s ease, opacity .18s ease;}
     .contact{display:flex; gap:10px; flex-direction:column;}
+      /* two-column layout for contact area: form + details - left content + a right compact details card
+         Center the grid and make the right card a fixed width so the avatar column aligns like the mock. */
+      .contact-grid{display:grid; grid-template-columns: 1fr 360px; gap:20px; align-items:start; grid-auto-rows:1fr; margin: 0 auto; max-width:980px;}
+      .contact-grid > .card{ /* ensure both cards match height and layout */
+        display:flex; flex-direction:column; justify-content:space-between; min-height:420px; padding:22px; height:100%; overflow:hidden;
+        border-radius:14px; transition: height .28s ease, transform .16s ease, box-shadow .18s ease, border-color .18s ease;
+        border:1px solid rgba(15,23,42,0.04); background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+        box-shadow: 0 18px 40px rgba(2,6,23,0.06);
+      }
+      /* hover/active accent for contact cards */
+      .contact-grid > .card:hover{ transform: translateY(-6px); box-shadow: 0 28px 60px rgba(2,6,23,0.14); border-color: rgba(255,177,0,0.10); }
+  /* title styling inside contact cards */
+  #connect-me h2, #contact-details h2{ margin:0 0 8px; font-size:20px; display:flex; align-items:center; gap:10px }
+      /* small decorative dot to the left of the heading */
+      #connect-me h2::before, #contact-details h2::before{ content:''; width:12px; height:12px; border-radius:50%; background:linear-gradient(90deg,var(--accent),var(--accent-2)); display:inline-block }
+      /* compact detail rows */
+      #contact-details .muted{ margin-top:2px }
+      /* contact avatar (round) */
+      .contact-avatar-wrap{display:flex; align-items:center; gap:16px; margin-top:12px}
+      /* center avatar when in the details card and allow poster-like presentation */
+      #contact-details .contact-avatar-wrap{ flex-direction:column; align-items:center; text-align:center }
+      .contact-avatar{width:120px; height:120px; border-radius:9999px; object-fit:cover; display:block; border:4px solid rgba(255,255,255,0.9); box-shadow:0 14px 40px rgba(2,6,23,0.14); background:linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
+        transition: transform 260ms cubic-bezier(.2,.9,.3,1), box-shadow 260ms ease, filter 260ms ease; will-change: transform, box-shadow; cursor:pointer;
+      }
+  .contact-avatar:hover, .contact-avatar:focus{ transform: scale(1.06); box-shadow:0 26px 60px rgba(2,6,23,0.18); filter:brightness(1.02); }
+      .contact-avatar:active{ transform: scale(0.995); }
+      @media (max-width:880px){ .contact-avatar{width:96px;height:96px} }
+      /* Align contact detail rows: label/value on the left, action (copy) on the right */
+      .contact-row {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: 12px;
+        align-items: center;
+      }
+
+      .contact-row .label {
+        color: var(--neutral-200, #e6eef8);
+        font-size: 0.95rem;
+        line-height: 1.3;
+        word-break: break-word;
+      }
+
+      .contact-row .tool-btn {
+        white-space: nowrap;
+      }
+      /* responsive: stack cards on small screens */
+  @media (max-width:880px){ .contact-grid{ grid-template-columns:1fr; } .contact-grid > .card{ min-height:auto; height:auto } }
   .contact a{display:block; text-decoration:none; color:inherit; background:rgba(255,255,255,0.02); padding:12px; border-radius:10px;}
   /* contact form tweaks */
   #contact-form .input{width:100%;}
@@ -208,7 +658,7 @@
     button[type="submit"]{background:linear-gradient(90deg,var(--accent),var(--accent-2)); color:var(--bg); border:0; padding:10px 12px; border-radius:10px; font-weight:700; cursor:pointer;}
     .muted{color:var(--muted); font-size:13px}
 
-    footer{margin-top:30px; color:var(--muted); font-size:13px; text-align:center;}
+  footer{margin-top:80px; color:var(--muted); font-size:13px; text-align:center;}
 
     /* Modal */
     .modal{
@@ -220,16 +670,40 @@
     .close{background:transparent; border:0; color:var(--muted); font-weight:700; cursor:pointer}
       /* Page basics - ensure readable defaults */
       body{background:var(--bg-gradient); color:var(--text); margin:0; -webkit-font-smoothing:antialiased;}
-      .container{max-width:980px; margin:36px auto; padding:20px;}
+  .container{max-width:980px; margin:36px auto; padding:20px; padding-bottom:220px;}
       header{display:flex; align-items:center; justify-content:space-between; margin-bottom:18px}
       .brand{display:flex; gap:12px; align-items:center; text-decoration:none; color:inherit}
   /* Header utility classes to remove inline styles */
-      .brand-inner{display:flex; align-items:center; gap:12px}
-      .logo{width:54px; height:54px; border-radius:12px; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:18px; color:var(--heading); position:relative}
+  .brand-inner{display:flex; align-items:center; gap:8px}
+  .logo{width:46px; height:46px; border-radius:10px; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:16px; color:var(--heading); position:relative}
       .sr-only{position:absolute; width:0; height:0; overflow:hidden; border:0; clip:rect(0 0 0 0); clip-path:inset(50%); white-space:nowrap}
       .site-name{font-weight:700}
       .tagline{margin-top:4px; font-size:13px}
       .nav-primary{display:flex; align-items:center; gap:14px}
+      /* Make header CTAs visually consistent: pill shape, padding, gap, and alignment */
+      .nav-primary .navlink, .nav-primary .btn, .nav-primary button{
+        display:inline-flex;
+        align-items:center;
+        gap:8px;
+        padding:5px 10px;
+        border-radius:12px;
+        font-weight:700;
+        text-decoration:none;
+        transition: transform .12s ease, box-shadow .12s ease, filter .12s ease;
+        text-transform:uppercase; /* uppercase labels */
+        font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+        font-size:12px; /* slightly smaller */
+        min-height:36px;
+        letter-spacing:0.35px;
+        background: linear-gradient(90deg, var(--accent) 0%, var(--accent-2) 100%);
+        color: var(--bg);
+        box-shadow: 0 8px 18px rgba(0,87,217,0.10);
+      }
+      /* Ensure native <button class="btn"> inside the header matches anchor pills exactly */
+      .nav-primary .btn{ padding:5px 10px; border-radius:12px; background: linear-gradient(90deg, var(--accent) 0%, var(--accent-2) 100%); color:var(--bg); display:inline-flex; align-items:center; gap:8px; min-height:36px; font-weight:700; font-size:12px; text-transform:uppercase; }
+  /* header CTAs are uniform here; no alternate styles needed */
+      /* Improve tap responsiveness on mobile */
+      a, button{ touch-action: manipulation; }
       .theme-toggle{margin-left:10px; padding:8px 12px; border-radius:8px; border:none; cursor:pointer; background:var(--card); color:var(--muted); font-weight:600; box-shadow:0 1px 4px rgba(0,0,0,0.04); transition:transform 120ms ease}
   /* Responsive header: stack on small screens */
   @media (max-width:720px){
@@ -238,6 +712,8 @@
     .brand{width:100%; justify-content:space-between}
     .nav-primary .btn, .nav-primary .navlink{font-size:14px}
   }
+  /* Helper: when the aside should stop being sticky (footer visible) */
+  aside.unstuck{ position:relative; top:auto; transform:translateY(6px); opacity:0.98; }
   /* Small spacing utilities */
   .spacer-md{height:18px}
   .spacer-sm{height:12px}
@@ -252,6 +728,9 @@
   #contact-form{margin-top:16px; display:flex; flex-direction:column; gap:10px}
   .form-row{display:flex; gap:8px; align-items:center}
   .contact-note{margin-top:12px; font-size:14px; color:var(--muted)}
+  /* Contact rows use grid to align label and copy button neatly */
+  .contact-row{ display:grid; grid-template-columns: 1fr auto; align-items:center; gap:12px; }
+  .contact-row .label{ white-space:normal; }
   /* Modal specific */
   .modal-header{display:flex; align-items:center; justify-content:space-between; gap:10px; margin-bottom:8px}
   #modal-tags{margin-top:12px; display:flex; gap:8px; flex-wrap:wrap}
@@ -280,6 +759,17 @@
 </head>
 <body>
   <a href="#main-content" class="skip-link">Skip to content</a>
+  <!-- Cookie / Analytics consent banner (inserted here so it appears early and is available to assistive tech) -->
+  <div id="cookie-consent" role="dialog" aria-live="polite" aria-label="Cookie and analytics consent" aria-hidden="true" style="display:none">
+    <div class="cc-copy">
+      We use a small set of cookies to improve your experience and to collect anonymous analytics. No personal data is sold. You can accept analytics or decline — changing your choice is always possible.
+    </div>
+    <div class="cc-actions">
+      <button class="cc-btn cc-decline" id="cc-decline">Decline</button>
+      <button class="cc-btn cc-accept" id="cc-accept">Accept analytics</button>
+      <a href="#contact" class="manage" id="cc-manage">Manage</a>
+    </div>
+  </div>
   <div class="container">
     <!-- Toast container for non-blocking messages -->
     <div id="toast-wrap" aria-live="polite" style="position:fixed; right:18px; bottom:18px; z-index:120; display:flex; flex-direction:column; gap:8px"></div>
@@ -290,11 +780,11 @@
           <div class="logo" role="img" aria-label="Umbrella InFo logo">
             <!-- Preferred: attached raster logo for visual fidelity -->
             <!-- Tuned inline SVG logo: sharper canopy, balanced spacing, scalable text -->
-            <svg id="brand-svg" width="54" height="54" viewBox="0 0 120 120" role="img" aria-label="Umbrella InFo logo" xmlns="http://www.w3.org/2000/svg" style="width:54px;height:54px;display:inline-block">
+            <svg id="brand-svg" viewBox="0 0 120 120" role="img" aria-label="Umbrella InFo logo" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet" style="width:100%;height:100%;display:block">
               <defs>
                 <linearGradient id="g1" x1="0" y1="0" x2="1" y2="1">
-                  <stop offset="0%" stop-color="#0057D9"/>
-                  <stop offset="100%" stop-color="#00C9A7"/>
+                  <stop offset="0%" stop-color="#A400FF"/>
+                    <stop offset="100%" stop-color="#00D4FF"/>
                 </linearGradient>
                 <filter id="soft" x="-20%" y="-20%" width="140%" height="140%">
                   <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#002a66" flood-opacity="0.12"/>
@@ -306,9 +796,8 @@
               <!-- handle: subtle, centered under canopy -->
               <path d="M62 62 C62 82, 46 82, 46 72" stroke="#ffffff" stroke-width="5" stroke-linecap="round" fill="none" />
               <!-- small stem -->
-              <rect x="58" y="58" width="4" height="6" rx="2" fill="#ffffff" />
-              <!-- brand wordmark (keeps visual balance on header) -->
-              <text x="60" y="96" font-family:"Inter", system-ui, Arial, sans-serif" font-weight="700" font-size="14" text-anchor="middle" fill="#ffffff">Umbrella InFo</text>
+                  <rect x="58" y="58" width="4" height="6" rx="2" fill="#ffffff" />
+              <!-- wordmark removed from the SVG so the separate .site-name element can render clearly at small sizes -->
             </svg>
           </div>
           <div>
@@ -321,16 +810,70 @@
   <a class="navlink btn-gradient" href="#about">About <svg class="icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
   <a class="navlink btn-gradient" href="#projects">Projects <svg class="icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
   <a class="navlink btn-gradient" href="#contact">Contact <svg class="icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-  <a class="btn" href="https://drive.google.com/drive/folders/1DlMR4XpiUCnkqDk1gsa9W4Ocd5Oa9CwC?usp=sharing" target="_blank" rel="noopener">Download Resume <svg class="icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M12 3v12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M8 11l4 4 4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M21 21H3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+  <!-- Hire / Resume CTAs (prominent for recruiters) -->
+  <a class="navlink btn-gradient" id="hire-me-btn" href="#contact" aria-label="Hire me or request a quote">Hire Me</a>
+  <a class="btn" href="https://drive.google.com/drive/folders/1DlMR4XpiUCnkqDk1gsa9W4Ocd5Oa9CwC?usp=sharing" target="_blank" rel="noopener">Resume <svg class="icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M12 3v12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M8 11l4 4 4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M21 21H3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
         <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark/light mode">☀️</button>
       </nav>
     </header>
 
   <main id="main-content">
+      <!-- Hero / Banner: data-themed dashboard graphic + headline -->
+      <section class="hero card" id="hero-banner" aria-hidden="false" style="margin-bottom:18px;">
+        <div style="display:flex; gap:18px; align-items:center;">
+          <div style="flex:1;">
+            <h1 style="margin:0 0 8px; font-size:28px;">Where Data Speaks — Dashboards & Insights</h1>
+            <p class="muted lead">I build data products — interactive dashboards, automated reports and actionable analytics. Explore selected projects or get in touch to start turning your data into decisions.</p>
+              <div style="margin-top:12px; display:flex; gap:10px; align-items:center;">
+              <a class="btn" href="#projects" aria-label="View projects">View projects</a>
+              <a class="navlink btn-gradient" href="#contact" aria-label="Contact me">Contact</a>
+            </div>
+          </div>
+          <div style="width:320px; flex:0 0 320px;">
+            <!-- Inline SVG: simple multi-chart dashboard illustration matching brand colors -->
+            <svg viewBox="0 0 320 200" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Dashboard illustration">
+              <defs>
+                <linearGradient id="heroGrad" x1="0" x2="1">
+                  <stop offset="0%" stop-color="var(--brand)" stop-opacity="0.12" />
+                  <stop offset="100%" stop-color="var(--accent)" stop-opacity="0.06" />
+                </linearGradient>
+              </defs>
+              <rect x="0" y="0" width="320" height="200" rx="12" fill="url(#heroGrad)" />
+              <!-- mini bar chart -->
+              <g transform="translate(18,26)">
+                <rect x="0" y="38" width="26" height="36" rx="3" fill="#dbeafe" />
+                <rect x="36" y="18" width="26" height="56" rx="3" fill="#bfdbfe" />
+                <rect x="72" y="6" width="26" height="68" rx="3" fill="var(--brand)" />
+                <rect x="108" y="28" width="26" height="46" rx="3" fill="#93c5fd" />
+              </g>
+              <!-- mini line chart -->
+              <g transform="translate(150,22)">
+                <rect x="0" y="0" width="144" height="80" rx="8" fill="#fff" opacity="0.03" />
+                <polyline points="6,56 26,44 50,62 74,28 98,40 122,18" fill="none" stroke="var(--accent)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" opacity="0.95" />
+                <circle cx="122" cy="18" r="4" fill="var(--brand)" />
+              </g>
+              <!-- KPI tiles -->
+              <g transform="translate(18,122)">
+                <rect x="0" y="0" width="84" height="48" rx="8" fill="#fff" opacity="0.02" />
+                <rect x="96" y="0" width="84" height="48" rx="8" fill="#fff" opacity="0.02" />
+                <rect x="192" y="0" width="110" height="48" rx="8" fill="#fff" opacity="0.02" />
+                <text x="12" y="24" fill="var(--heading)" font-size="14" font-weight="700">Revenue</text>
+                <text x="108" y="24" fill="var(--heading)" font-size="14" font-weight="700">Active Users</text>
+              </g>
+            </svg>
+          </div>
+        </div>
+        <style>
+          /* Hero-specific styles (kept inline for single-file template) */
+          #hero-banner{ padding:18px; display:block; border-radius:12px; }
+          #hero-banner .lead{ color:var(--muted); margin-top:8px }
+          @media (max-width:880px){ #hero-banner{ padding:14px } #hero-banner > div{ flex-direction:column } #hero-banner svg{ width:100%; max-width:320px } }
+        </style>
+      </section>
       <section>
         <!-- About Section -->
         <div class="card" id="about">
-          <h1>About Me</h1>
+          <h1></h1>
           <p>I'm Mujassim Khan, a data analyst with over six years of experience turning raw data into actionable insights. My expertise spans Advanced Excel (Power Query, Power Pivot), Power BI, and SQL, allowing me to build dynamic dashboards, automate reports, and optimize data workflows for smarter decision-making.</p>
           <p>With a sharp eye for detail and a passion for uncovering patterns, I help businesses streamline their data processes and unlock valuable insights. Whether it's crafting interactive reports, designing robust data models, or enhancing database performance, I deliver solutions that drive results.</p>
           <p>Let's connect and transform your data into a strategic asset! 🚀</p>
@@ -393,31 +936,31 @@
             </div>
           </div>
           <div class="skills mt-12">
-            <div class="skill" data-score="4">
+            <div class="skill" data-score="4" tabindex="0">
               <svg viewBox="0 0 24 24" class="skill-icon" role="img" aria-label="Excel icon"><title>Excel</title><rect x="0" y="0" width="24" height="24" rx="4" fill="#217346"/><g fill="#fff"><rect x="5" y="5" width="4" height="4" rx="0.8"/><rect x="10" y="5" width="4" height="4" rx="0.8"/><rect x="15" y="5" width="4" height="4" rx="0.8"/><rect x="5" y="10" width="4" height="4" rx="0.8"/><rect x="10" y="10" width="4" height="4" rx="0.8"/><rect x="15" y="10" width="4" height="4" rx="0.8"/></g></svg>
               <div class="meta"><b>Microsoft Excel</b><span class="muted">Power Query, PivotTables</span></div>
             </div>
-            <div class="skill" data-score="4">
+            <div class="skill" data-score="4" tabindex="0">
               <svg viewBox="0 0 24 24" class="skill-icon" role="img" aria-label="Python icon"><title>Python</title><rect x="0" y="0" width="24" height="24" rx="4" fill="#3776ab"/><path d="M7.5 6.5c1.2-1 3.6-1 4.8 0 .6.5.6 1.6 0 2.1-.5.4-1.2.5-1.8.4-.6-.1-1.1-.6-1.4-1.1-.3-.5-.4-1.1 0-1.4zM16.5 17.5c-1.2 1-3.6 1-4.8 0-.6-.5-.6-1.6 0-2.1.5-.4 1.2-.5 1.8-.4.6.1 1.1.6 1.4 1.1.3.5.4 1.1 0 1.4z" fill="#ffd43b"/></svg>
               <div class="meta"><b>Python</b><span class="muted">pandas, numpy, cleaning</span></div>
             </div>
-            <div class="skill" data-score="5">
+            <div class="skill" data-score="5" tabindex="0">
               <svg viewBox="0 0 24 24" class="skill-icon" role="img" aria-label="SQL Server icon"><title>SQL Server</title><rect x="0" y="0" width="24" height="24" rx="4" fill="#2b6cb0"/><g fill="#fff"><ellipse cx="12" cy="7.2" rx="6" ry="2.1"/><path d="M6 7.2v5.6c0 1.1 2.7 2 6 2s6-.9 6-2V7.2"/></g></svg>
               <div class="meta"><b>Microsoft SQL Server</b><span class="muted">ETL, T-SQL, Data Modeling</span></div>
             </div>
-            <div class="skill" data-score="5">
+            <div class="skill" data-score="5" tabindex="0">
               <svg viewBox="0 0 24 24" class="skill-icon" role="img" aria-label="Power BI icon"><title>Power BI</title><rect x="0" y="0" width="24" height="24" rx="4" fill="#f2c94c"/><g fill="#111"><rect x="5.2" y="13" width="2" height="6" rx="0.5"/><rect x="9.2" y="9" width="2" height="10" rx="0.5"/><rect x="13.2" y="6" width="2" height="13" rx="0.5"/><rect x="17.2" y="3" width="2" height="16" rx="0.5"/></g></svg>
               <div class="meta"><b>Power BI</b><span class="muted">Reports, DAX, Dataflows</span></div>
             </div>
-            <div class="skill" data-score="3">
+            <div class="skill" data-score="3" tabindex="0">
               <svg viewBox="0 0 24 24" class="skill-icon" role="img" aria-label="Tableau icon"><title>Tableau</title><rect x="0" y="0" width="24" height="24" rx="4" fill="#e56a2f"/><g fill="#fff"><circle cx="7" cy="7" r="1.4"/><circle cx="12" cy="7" r="1.4"/><circle cx="17" cy="7" r="1.4"/><circle cx="7" cy="12" r="1.4"/><circle cx="12" cy="12" r="1.4"/><circle cx="17" cy="12" r="1.4"/><circle cx="10" cy="17" r="1.4"/><circle cx="14" cy="17" r="1.4"/></g></svg>
               <div class="meta"><b>Tableau</b><span class="muted">Interactive viz & dashboards</span></div>
             </div>
-            <div class="skill" data-score="3">
+            <div class="skill" data-score="3" tabindex="0">
               <svg viewBox="0 0 24 24" class="skill-icon" role="img" aria-label="Power Apps icon"><title>Power Apps</title><rect x="0" y="0" width="24" height="24" rx="4" fill="#8b5cf6"/><g fill="#fff"><rect x="6" y="6" width="12" height="12" rx="2" opacity="0.12"/><path d="M8 8h8v2H8zM8 11h8v2H8z"/></g></svg>
               <div class="meta"><b>Power Apps</b><span class="muted">Canvas & Model-driven Apps</span></div>
             </div>
-            <div class="skill" data-score="2">
+            <div class="skill" data-score="2" tabindex="0">
               <svg viewBox="0 0 24 24" class="skill-icon" role="img" aria-label="Access icon"><title>Access</title><rect x="0" y="0" width="24" height="24" rx="4" fill="#d1495b"/><g fill="#fff"><rect x="6" y="6" width="10" height="12" rx="1"/><text x="11" y="15" text-anchor="middle" font-size="9" font-weight="700" fill="#d1495b">A</text></g></svg>
               <div class="meta"><b>Microsoft Access</b><span class="muted">Forms, Queries, Reporting</span></div>
             </div>
@@ -440,174 +983,545 @@
 
         <!-- Projects section remains unchanged -->
     <section id="projects" class="card">
-          <h2 style="margin-top:0">Select Projects</h2>
+          <h2 style="margin-top:0"><svg class="section-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect width="24" height="24" rx="4" fill="#A400FF" /><g fill="#FFD54F"><rect x="5" y="7" width="3" height="10" rx="1"/><rect x="10" y="4" width="3" height="13" rx="1"/><rect x="15" y="2" width="3" height="15" rx="1"/></g></svg>Select Projects</h2>
           <p class="muted">Short descriptions. Click any card to read a summary and tools used.</p>
 
           <div class="projects" aria-live="polite">
             <article class="proj" tabindex="0" data-title="Sales Dashboard — Retail Insights" data-desc="End-to-end dashboard for retail sales; cleaned transaction data with Python, modeled in SQL, interactive visuals in Power BI. Implemented PowerMap for regional shipment routes and time-based animations." data-tags="Python,MS SQL,Power BI,PowerMap" data-link="https://drive.google.com/drive/folders/1qO4BqtR3CdT6WGK3U25lgHFoZQU2skbZ?usp=sharing">
-              <h4>Sales Dashboard — Retail Insights <a class="proj-icon" href="https://drive.google.com/drive/folders/1qO4BqtR3CdT6WGK3U25lgHFoZQU2skbZ?usp=sharing" target="_blank" rel="noopener noreferrer" aria-label="Open Sales Dashboard in Google Drive"><svg viewBox="0 0 24 24" width="14" height="14" class="icon" xmlns="http://www.w3.org/2000/svg"><path d="M12 2L21.5 8.5 12 15 2.5 8.5 12 2z" fill="#0F9D58"></path><path d="M2.5 8.5L12 15 12 21.5 2.5 15.5 2.5 8.5z" fill="#F4B400"></path><path d="M21.5 8.5L12 15 12 21.5 21.5 15.5 21.5 8.5z" fill="#4285F4"></path></svg></a></h4>
-              <p class="muted">Interactive sales performance with region-level mapping and time-series analysis.</p>
-              <div class="proj-actions"></div>
+              <div class="proj-row">
+                <div class="proj-thumb" data-thumb>
+                  <svg width="100%" height="100%" viewBox="0 0 72 54" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Project thumbnail placeholder">
+                    <defs>
+                      <linearGradient id="phg" x1="0" y1="0" x2="1" y2="1">
+                        <stop offset="0%" stop-color="#eef2ff" />
+                        <stop offset="100%" stop-color="#f0f7ff" />
+                      </linearGradient>
+                    </defs>
+                    <rect x="0" y="0" width="72" height="54" rx="8" fill="url(#phg)" />
+                    <g transform="translate(12,10)" fill="#c7d7ff" opacity="0.95">
+                      <rect x="0" y="0" width="48" height="8" rx="3" />
+                      <rect x="0" y="12" width="32" height="6" rx="3" />
+                      <rect x="0" y="22" width="22" height="6" rx="3" />
+                    </g>
+                  </svg>
+                </div>
+                <div class="proj-content">
+                  <h4>Sales Dashboard — Retail Insights <a class="proj-icon" href="https://drive.google.com/drive/folders/1qO4BqtR3CdT6WGK3U25lgHFoZQU2skbZ?usp=sharing" target="_blank" rel="noopener noreferrer" aria-label="Open Sales Dashboard in Google Drive"><svg viewBox="0 0 24 24" width="14" height="14" class="icon" xmlns="http://www.w3.org/2000/svg"><path d="M12 2L21.5 8.5 12 15 2.5 8.5 12 2z" fill="#0F9D58"></path><path d="M2.5 8.5L12 15 12 21.5 2.5 15.5 2.5 8.5z" fill="#F4B400"></path><path d="M21.5 8.5L12 15 12 21.5 21.5 15.5 21.5 8.5z" fill="#4285F4"></path></svg></a></h4>
+                  <p class="muted">Interactive sales performance with region-level mapping and time-series analysis.</p>
+                  <div class="proj-actions"></div>
+                </div>
+              </div>
             </article>
 
             <article class="proj" tabindex="0" data-title="Customer Churn Analysis" data-desc="Analyzed churn patterns using Python; built feature pipeline for ML-ready data; visualized cohort behavior in Tableau and created Excel dashboards for stakeholders." data-tags="Python,Excel,Tableau" data-link="https://drive.google.com/drive/folders/1Cict-t7qeWFm18BHCB2-s2pzVr671J0r?usp=drive_link">
-              <h4>Customer Churn Analysis <a class="proj-icon" href="https://drive.google.com/drive/folders/1Cict-t7qeWFm18BHCB2-s2pzVr671J0r?usp=drive_link" target="_blank" rel="noopener noreferrer" aria-label="Open Customer Churn Analysis in Google Drive"><svg viewBox="0 0 24 24" width="14" height="14" class="icon" xmlns="http://www.w3.org/2000/svg"><path d="M12 2L21.5 8.5 12 15 2.5 8.5 12 2z" fill="#0F9D58"></path><path d="M2.5 8.5L12 15 12 21.5 2.5 15.5 2.5 8.5z" fill="#F4B400"></path><path d="M21.5 8.5L12 15 12 21.5 21.5 15.5 21.5 8.5z" fill="#4285F4"></path></svg></a></h4>
-              <p class="muted">Cohort analysis, retention metrics, and stakeholder-ready dashboards.</p>
-              <div class="proj-actions"></div>
+              <div class="proj-row">
+                <div class="proj-thumb" data-thumb>
+                  <svg width="100%" height="100%" viewBox="0 0 72 54" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Project thumbnail placeholder">
+                    <defs>
+                      <linearGradient id="phg2" x1="0" y1="0" x2="1" y2="1">
+                        <stop offset="0%" stop-color="#eef2ff" />
+                        <stop offset="100%" stop-color="#f0f7ff" />
+                      </linearGradient>
+                    </defs>
+                    <rect x="0" y="0" width="72" height="54" rx="8" fill="url(#phg2)" />
+                    <g transform="translate(12,10)" fill="#c7d7ff" opacity="0.95">
+                      <rect x="0" y="0" width="48" height="8" rx="3" />
+                      <rect x="0" y="12" width="32" height="6" rx="3" />
+                      <rect x="0" y="22" width="22" height="6" rx="3" />
+                    </g>
+                  </svg>
+                </div>
+                <div class="proj-content">
+                  <h4>Customer Churn Analysis <a class="proj-icon" href="https://drive.google.com/drive/folders/1Cict-t7qeWFm18BHCB2-s2pzVr671J0r?usp=drive_link" target="_blank" rel="noopener noreferrer" aria-label="Open Customer Churn Analysis in Google Drive"><svg viewBox="0 0 24 24" width="14" height="14" class="icon" xmlns="http://www.w3.org/2000/svg"><path d="M12 2L21.5 8.5 12 15 2.5 8.5 12 2z" fill="#0F9D58"></path><path d="M2.5 8.5L12 15 12 21.5 2.5 15.5 2.5 8.5z" fill="#F4B400"></path><path d="M21.5 8.5L12 15 12 21.5 21.5 15.5 21.5 8.5z" fill="#4285F4"></path></svg></a></h4>
+                  <p class="muted">Cohort analysis, retention metrics, and stakeholder-ready dashboards.</p>
+                  <div class="proj-actions"></div>
+                </div>
+              </div>
             </article>
 
             <article class="proj" tabindex="0" data-title="Financial Reporting Automation" data-desc="Automated monthly reporting using Power Query and SQL stored procedures; created Power BI paginated reports and Excel templates to reduce manual effort by 70%." data-tags="MS SQL,Power Query,Power BI,Excel" data-link="https://drive.google.com/drive/folders/1gNOf8zgDuIzxz5t8_c2VlG0dC4BzKXPw?usp=drive_link">
-              <h4>Financial Reporting Automation <a class="proj-icon" href="https://drive.google.com/drive/folders/1gNOf8zgDuIzxz5t8_c2VlG0dC4BzKXPw?usp=drive_link" target="_blank" rel="noopener noreferrer" aria-label="Open Financial Reporting Automation in Google Drive"><svg viewBox="0 0 24 24" width="14" height="14" class="icon" xmlns="http://www.w3.org/2000/svg"><path d="M12 2L21.5 8.5 12 15 2.5 8.5 12 2z" fill="#0F9D58"></path><path d="M2.5 8.5L12 15 12 21.5 2.5 15.5 2.5 8.5z" fill="#F4B400"></path><path d="M21.5 8.5L12 15 12 21.5 21.5 15.5 21.5 8.5z" fill="#4285F4"></path></svg></a></h4>
-              <p class="muted">Reduced manual reporting and improved data accuracy across finance teams.</p>
+              <div class="proj-row">
+                <div class="proj-thumb" data-thumb>
+                  <svg width="100%" height="100%" viewBox="0 0 72 54" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Project thumbnail placeholder">
+                    <defs>
+                      <linearGradient id="phg3" x1="0" y1="0" x2="1" y2="1">
+                        <stop offset="0%" stop-color="#eef2ff" />
+                        <stop offset="100%" stop-color="#f0f7ff" />
+                      </linearGradient>
+                    </defs>
+                    <rect x="0" y="0" width="72" height="54" rx="8" fill="url(#phg3)" />
+                    <g transform="translate(12,10)" fill="#c7d7ff" opacity="0.95">
+                      <rect x="0" y="0" width="48" height="8" rx="3" />
+                      <rect x="0" y="12" width="32" height="6" rx="3" />
+                      <rect x="0" y="22" width="22" height="6" rx="3" />
+                    </g>
+                  </svg>
+                </div>
+                <div class="proj-content">
+                  <h4>Financial Reporting Automation <a class="proj-icon" href="https://drive.google.com/drive/folders/1gNOf8zgDuIzxz5t8_c2VlG0dC4BzKXPw?usp=drive_link" target="_blank" rel="noopener noreferrer" aria-label="Open Financial Reporting Automation in Google Drive"><svg viewBox="0 0 24 24" width="14" height="14" class="icon" xmlns="http://www.w3.org/2000/svg"><path d="M12 2L21.5 8.5 12 15 2.5 8.5 12 2z" fill="#0F9D58"></path><path d="M2.5 8.5L12 15 12 21.5 2.5 15.5 2.5 8.5z" fill="#F4B400"></path><path d="M21.5 8.5L12 15 12 21.5 21.5 15.5 21.5 8.5z" fill="#4285F4"></path></svg></a></h4>
+                  <p class="muted">Reduced manual reporting and improved data accuracy across finance teams.</p>
+                </div>
+              </div>
             </article>
 
             <article class="proj" tabindex="0" data-title="Operational KPIs & Alerts" data-desc="Built KPI monitoring and early warning metrics; ETL in Python, aggregated in SQL, alerts integrated into dashboards for quick action." data-tags="Python,MS SQL,Power BI" data-link="https://drive.google.com/drive/folders/1UTtdhKSuoLyNW4zsAAeV-4EjwrSYfS-1?usp=drive_link">
-              <h4>Operational KPIs & Alerts <a class="proj-icon" href="https://drive.google.com/drive/folders/1UTtdhKSuoLyNW4zsAAeV-4EjwrSYfS-1?usp=drive_link" target="_blank" rel="noopener noreferrer" aria-label="Open Operational KPIs & Alerts in Google Drive"><svg viewBox="0 0 24 24" width="14" height="14" class="icon" xmlns="http://www.w3.org/2000/svg"><path d="M12 2L21.5 8.5 12 15 2.5 8.5 12 2z" fill="#0F9D58"></path><path d="M2.5 8.5L12 15 12 21.5 2.5 15.5 2.5 8.5z" fill="#F4B400"></path><path d="M21.5 8.5L12 15 12 21.5 21.5 15.5 21.5 8.5z" fill="#4285F4"></path></svg></a></h4>
-              <p class="muted">Real-time KPI monitoring and automated alerting for operations.</p>
+              <div class="proj-row">
+                <div class="proj-thumb" data-thumb>
+                  <svg width="100%" height="100%" viewBox="0 0 72 54" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Project thumbnail placeholder">
+                    <defs>
+                      <linearGradient id="phg4" x1="0" y1="0" x2="1" y2="1">
+                        <stop offset="0%" stop-color="#eef2ff" />
+                        <stop offset="100%" stop-color="#f0f7ff" />
+                      </linearGradient>
+                    </defs>
+                    <rect x="0" y="0" width="72" height="54" rx="8" fill="url(#phg4)" />
+                    <g transform="translate(12,10)" fill="#c7d7ff" opacity="0.95">
+                      <rect x="0" y="0" width="48" height="8" rx="3" />
+                      <rect x="0" y="12" width="32" height="6" rx="3" />
+                      <rect x="0" y="22" width="22" height="6" rx="3" />
+                    </g>
+                  </svg>
+                </div>
+                <div class="proj-content">
+                  <h4>Operational KPIs & Alerts <a class="proj-icon" href="https://drive.google.com/drive/folders/1UTtdhKSuoLyNW4zsAAeV-4EjwrSYfS-1?usp=drive_link" target="_blank" rel="noopener noreferrer" aria-label="Open Operational KPIs & Alerts in Google Drive"><svg viewBox="0 0 24 24" width="14" height="14" class="icon" xmlns="http://www.w3.org/2000/svg"><path d="M12 2L21.5 8.5 12 15 2.5 8.5 12 2z" fill="#0F9D58"></path><path d="M2.5 8.5L12 15 12 21.5 2.5 15.5 2.5 8.5z" fill="#F4B400"></path><path d="M21.5 8.5L12 15 12 21.5 21.5 15.5 21.5 8.5z" fill="#4285F4"></path></svg></a></h4>
+                  <p class="muted">Real-time KPI monitoring and automated alerting for operations.</p>
+                </div>
+              </div>
             </article>
           </div>
         </section>
 
+        <script>
+          (function(){
+            const modal = document.getElementById('projectModal');
+      const titleEl = modal.querySelector('.modal-title');
+      const bodyEl = modal.querySelector('.proj-body-text');
+      const tagsEl = modal.querySelector('.modal-tags');
+      const linkEl = modal.querySelector('.modal-open-link');
+      const closeBtn = modal.querySelector('.modal-close');
+      const thumbEl = modal.querySelector('[data-thumb]');
+      const toolsEl = modal.querySelector('.modal-tools');
+            let lastFocused = null;
+
+            function openModal(data){
+              lastFocused = document.activeElement;
+              titleEl.textContent = data.title;
+              bodyEl.textContent = data.desc;
+              // populate tools area (if provided) otherwise use tags
+              toolsEl.innerHTML = '';
+              const tools = (data.tools || data.tags || '').split(',').map(t=>t.trim()).filter(Boolean);
+              tools.forEach(t=>{ const s=document.createElement('div'); s.className='tag'; s.textContent=t; toolsEl.appendChild(s); });
+              // tag chips
+              tagsEl.innerHTML = '';
+              (data.tags || '').split(',').map(t=>t.trim()).filter(Boolean).forEach(t=>{ const d=document.createElement('div'); d.className='tag'; d.textContent=t; tagsEl.appendChild(d); });
+              linkEl.href = data.link || '#';
+              // thumbnail
+              thumbEl.innerHTML = '';
+              if(data.thumb){ const img=document.createElement('img'); img.src=data.thumb; img.alt = data.title + ' thumbnail'; img.style.width='100%'; img.style.height='100%'; img.style.objectFit='cover'; thumbEl.appendChild(img); } else { thumbEl.style.background='linear-gradient(135deg,#eef2ff,#f0f7ff)'; }
+              modal.classList.add('show');
+              modal.setAttribute('aria-hidden','false');
+              // focus close button
+              closeBtn.focus();
+            }
+
+            function closeModal(){
+              modal.classList.remove('show');
+              modal.setAttribute('aria-hidden','true');
+              if(lastFocused && typeof lastFocused.focus === 'function') lastFocused.focus();
+            }
+
+            document.querySelectorAll('.projects .proj').forEach(el=>{
+              function handler(){
+                  openModal({
+                    title: el.getAttribute('data-title') || el.querySelector('h4')?.innerText || 'Project',
+                    desc: el.getAttribute('data-desc') || el.querySelector('p')?.innerText || '',
+                    tags: el.getAttribute('data-tags') || '',
+                    tools: el.getAttribute('data-tools') || el.getAttribute('data-tags') || '',
+                    thumb: el.getAttribute('data-thumb') || '',
+                    link: el.getAttribute('data-link') || '#'
+                  });
+                }
+              el.addEventListener('click', handler);
+              el.addEventListener('keydown', (ev)=>{
+                if(ev.key === 'Enter' || ev.key === ' ') { ev.preventDefault(); handler(); }
+              });
+            });
+
+            // .proj-row markup is now static in the HTML; no runtime injection required
+
+            closeBtn.addEventListener('click', closeModal);
+            modal.addEventListener('click', (ev)=>{ if(ev.target === modal) closeModal(); });
+            document.addEventListener('keydown', (ev)=>{ if(ev.key === 'Escape' && modal.classList.contains('show')) closeModal(); });
+          })();
+        </script>
+
         <!-- Categorized project sections -->
         <section id="powerbi-projects" class="card mt-16">
-          <h2 style="margin-top:0">Power BI Projects</h2>
+          <h2 style="margin-top:0"><svg class="section-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect width="24" height="24" rx="4" fill="#f2c94c"/><g fill="#111"><rect x="5.2" y="13" width="2" height="6" rx="0.5"/><rect x="9.2" y="9" width="2" height="10" rx="0.5"/><rect x="13.2" y="6" width="2" height="13" rx="0.5"/><rect x="17.2" y="3" width="2" height="16" rx="0.5"/></g></svg>Power BI Projects</h2>
           <p class="muted">Selected Power BI work: reports, dashboards, and advanced DAX solutions.</p>
           <div class="projects mt-12" aria-live="polite">
             <article class="proj" tabindex="0" data-title="Sales Dashboard — Retail Insights" data-desc="Power BI report with map visuals, DAX measures and dynamic bookmarks." data-tags="Power BI, DAX, PowerMap" data-link="https://drive.google.com/drive/folders/14b-yp7dvI96v-SQXgGiQCdsuVLRppuru?usp=drive_link">
-              <h4>Sales Dashboard — Retail Insights
-                <a class="proj-icon" href="https://drive.google.com/drive/folders/14b-yp7dvI96v-SQXgGiQCdsuVLRppuru?usp=drive_link" target="_blank" rel="noopener" aria-label="Jump on Project: Sales Dashboard — Retail Insights" title="Jump on Project">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                    <path d="M3 12a9 9 0 1 1 18 0 9 9 0 0 1-18 0z" fill="#0057D9" opacity="0.12"/>
-                    <path d="M12 7v10M7 12h10" stroke="#0057D9" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+              <div class="proj-row">
+                <div class="proj-thumb" data-thumb>
+                  <svg width="100%" height="100%" viewBox="0 0 72 54" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Project thumbnail placeholder">
+                    <defs>
+                      <linearGradient id="phg5" x1="0" y1="0" x2="1" y2="1">
+                        <stop offset="0%" stop-color="#eef2ff" />
+                        <stop offset="100%" stop-color="#f0f7ff" />
+                      </linearGradient>
+                    </defs>
+                    <rect x="0" y="0" width="72" height="54" rx="8" fill="url(#phg5)" />
+                    <g transform="translate(12,10)" fill="#c7d7ff" opacity="0.95">
+                      <rect x="0" y="0" width="48" height="8" rx="3" />
+                      <rect x="0" y="12" width="32" height="6" rx="3" />
+                      <rect x="0" y="22" width="22" height="6" rx="3" />
+                    </g>
                   </svg>
-                </a>
-              </h4>
-              <p class="muted">Interactive report with regional mapping and time-series animations.</p>
+                </div>
+                <div class="proj-content">
+                  <h4>Sales Dashboard — Retail Insights
+                    <a class="proj-icon" href="https://drive.google.com/drive/folders/14b-yp7dvI96v-SQXgGiQCdsuVLRppuru?usp=drive_link" target="_blank" rel="noopener" aria-label="Jump on Project: Sales Dashboard — Retail Insights" title="Jump on Project">
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                        <path d="M3 12a9 9 0 1 1 18 0 9 9 0 0 1-18 0z" fill="#0057D9" opacity="0.12"/>
+                        <path d="M12 7v10M7 12h10" stroke="#0057D9" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                      </svg>
+                    </a>
+                  </h4>
+                  <p class="muted">Interactive report with regional mapping and time-series animations.</p>
+                </div>
+              </div>
             </article>
           </div>
         </section>
 
         <section id="advanced-excel-projects" class="card mt-16">
-          <h2 style="margin-top:0">Advanced Excel Projects</h2>
+          <h2 style="margin-top:0"><svg class="section-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect width="24" height="24" rx="4" fill="#217346"/><g fill="#fff"><rect x="4" y="5" width="5" height="5" rx="0.6"/><rect x="10" y="5" width="5" height="5" rx="0.6"/><rect x="4" y="11" width="5" height="5" rx="0.6"/><rect x="10" y="11" width="5" height="5" rx="0.6"/></g></svg>Advanced Excel Projects</h2>
           <p class="muted">Power Query, Power Pivot and automation projects built in Excel.</p>
           <div class="projects mt-12" aria-live="polite">
             <article class="proj" tabindex="0" data-title="Finance Template Automation" data-desc="Automated monthly consolidation using Power Query and pivot-backed reports." data-tags="Excel,Power Query,Power Pivot" data-link="https://drive.google.com/drive/folders/1RzXZXSgZcTT3sBf3WYgFxUg7kOR20oSw?usp=drive_link">
-              <h4>Finance Template Automation
-                <a class="proj-icon" href="https://drive.google.com/drive/folders/1RzXZXSgZcTT3sBf3WYgFxUg7kOR20oSw?usp=drive_link" target="_blank" rel="noopener" aria-label="Jump on Project: Finance Template Automation" title="Jump on Project">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                    <path d="M3 12a9 9 0 1 1 18 0 9 9 0 0 1-18 0z" fill="#0057D9" opacity="0.12"/>
-                    <path d="M12 7v10M7 12h10" stroke="#0057D9" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+              <div class="proj-row">
+                <div class="proj-thumb" data-thumb>
+                  <svg width="100%" height="100%" viewBox="0 0 72 54" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Project thumbnail placeholder">
+                    <defs>
+                      <linearGradient id="phg6" x1="0" y1="0" x2="1" y2="1">
+                        <stop offset="0%" stop-color="#eef2ff" />
+                        <stop offset="100%" stop-color="#f0f7ff" />
+                      </linearGradient>
+                    </defs>
+                    <rect x="0" y="0" width="72" height="54" rx="8" fill="url(#phg6)" />
+                    <g transform="translate(12,10)" fill="#c7d7ff" opacity="0.95">
+                      <rect x="0" y="0" width="48" height="8" rx="3" />
+                      <rect x="0" y="12" width="32" height="6" rx="3" />
+                      <rect x="0" y="22" width="22" height="6" rx="3" />
+                    </g>
                   </svg>
-                </a>
-              </h4>
-              <p class="muted">Consolidated report and templates for recurring monthly reporting.</p>
+                </div>
+                <div class="proj-content">
+                  <h4>Finance Template Automation
+                    <a class="proj-icon" href="https://drive.google.com/drive/folders/1RzXZXSgZcTT3sBf3WYgFxUg7kOR20oSw?usp=drive_link" target="_blank" rel="noopener" aria-label="Jump on Project: Finance Template Automation" title="Jump on Project">
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                        <path d="M3 12a9 9 0 1 1 18 0 9 9 0 0 1-18 0z" fill="#0057D9" opacity="0.12"/>
+                        <path d="M12 7v10M7 12h10" stroke="#0057D9" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                      </svg>
+                    </a>
+                  </h4>
+                  <p class="muted">Consolidated report and templates for recurring monthly reporting.</p>
+                </div>
+              </div>
             </article>
           </div>
         </section>
 
         <section id="python-projects" class="card mt-16">
-          <h2 style="margin-top:0">Python Projects</h2>
+          <h2 style="margin-top:0"><svg class="section-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect width="24" height="24" rx="4" fill="#3776ab"/><path d="M7.5 6.5c1.2-1 3.6-1 4.8 0 .6.5.6 1.6 0 2.1-.5.4-1.2.5-1.8.4-.6-.1-1.1-.6-1.4-1.1-.3-.5-.4-1.1 0-1.4z" fill="#ffd43b"/><path d="M16.5 17.5c-1.2 1-3.6 1-4.8 0-.6-.5-.6-1.6 0-2.1.5-.4 1.2-.5 1.8-.4.6.1 1.1.6 1.4 1.1.3.5.4 1.1 0 1.4z" fill="#ffd43b"/></svg>Python Projects</h2>
           <p class="muted">Data cleaning, ETL pipelines and automation built with Python (pandas, numpy).</p>
           <div class="projects mt-12" aria-live="polite">
             <article class="proj" tabindex="0" data-title="ETL Pipeline" data-desc="Python-based ETL to clean and prepare sales data for analytics." data-tags="Python,pandas,ETL" data-link="https://drive.google.com/drive/folders/1lQ-EOM3J8nCG09p8KrEVfylz9BA5iLPw?usp=drive_link">
-              <h4>ETL Pipeline
-                <a class="proj-icon" href="https://drive.google.com/drive/folders/1lQ-EOM3J8nCG09p8KrEVfylz9BA5iLPw?usp=drive_link" target="_blank" rel="noopener" aria-label="Jump on Project: ETL Pipeline" title="Jump on Project">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                    <path d="M3 12a9 9 0 1 1 18 0 9 9 0 0 1-18 0z" fill="#0057D9" opacity="0.12"/>
-                    <path d="M12 7v10M7 12h10" stroke="#0057D9" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+              <div class="proj-row">
+                <div class="proj-thumb" data-thumb>
+                  <svg width="100%" height="100%" viewBox="0 0 72 54" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Project thumbnail placeholder">
+                    <defs>
+                      <linearGradient id="phg7" x1="0" y1="0" x2="1" y2="1">
+                        <stop offset="0%" stop-color="#eef2ff" />
+                        <stop offset="100%" stop-color="#f0f7ff" />
+                      </linearGradient>
+                    </defs>
+                    <rect x="0" y="0" width="72" height="54" rx="8" fill="url(#phg7)" />
+                    <g transform="translate(12,10)" fill="#c7d7ff" opacity="0.95">
+                      <rect x="0" y="0" width="48" height="8" rx="3" />
+                      <rect x="0" y="12" width="32" height="6" rx="3" />
+                      <rect x="0" y="22" width="22" height="6" rx="3" />
+                    </g>
                   </svg>
-                </a>
-              </h4>
-              <p class="muted">Data ingestion, cleaning and transformation for analytics workflows.</p>
+                </div>
+                <div class="proj-content">
+                  <h4>ETL Pipeline
+                    <a class="proj-icon" href="https://drive.google.com/drive/folders/1lQ-EOM3J8nCG09p8KrEVfylz9BA5iLPw?usp=drive_link" target="_blank" rel="noopener" aria-label="Jump on Project: ETL Pipeline" title="Jump on Project">
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                        <path d="M3 12a9 9 0 1 1 18 0 9 9 0 0 1-18 0z" fill="#0057D9" opacity="0.12"/>
+                        <path d="M12 7v10M7 12h10" stroke="#0057D9" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                      </svg>
+                    </a>
+                  </h4>
+                  <p class="muted">Data ingestion, cleaning and transformation for analytics workflows.</p>
+                </div>
+              </div>
             </article>
           </div>
         </section>
 
         <section id="sql-projects" class="card mt-16">
-          <h2 style="margin-top:0">SQL Projects</h2>
+          <h2 style="margin-top:0"><svg class="section-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect width="24" height="24" rx="4" fill="#2b6cb0"/><g fill="#fff"><ellipse cx="12" cy="7.2" rx="6" ry="2.1"/><path d="M6 7.2v5.6c0 1.1 2.7 2 6 2s6-.9 6-2V7.2"/></g></svg>SQL Projects</h2>
           <p class="muted">Database design, T-SQL development, stored procedures and performance tuning.</p>
           <div class="projects mt-12" aria-live="polite">
             <article class="proj" tabindex="0" data-title="Data Warehouse Design" data-desc="Star schema design and ETL orchestration using SQL Server." data-tags="MS SQL,ETL,Data Warehouse" data-link="https://drive.google.com/drive/folders/1Em-8DnNQVa3PdoHdDLy82mt28FxjEOZv?usp=drive_link">
-              <h4>Data Warehouse Design
-                <a class="proj-icon" href="https://drive.google.com/drive/folders/1Em-8DnNQVa3PdoHdDLy82mt28FxjEOZv?usp=drive_link" target="_blank" rel="noopener" aria-label="Jump on Project: Data Warehouse Design" title="Jump on Project">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                    <path d="M3 12a9 9 0 1 1 18 0 9 9 0 0 1-18 0z" fill="#0057D9" opacity="0.12"/>
-                    <path d="M12 7v10M7 12h10" stroke="#0057D9" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+              <div class="proj-row">
+                <div class="proj-thumb" data-thumb>
+                  <svg width="100%" height="100%" viewBox="0 0 72 54" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Project thumbnail placeholder">
+                    <defs>
+                      <linearGradient id="phg8" x1="0" y1="0" x2="1" y2="1">
+                        <stop offset="0%" stop-color="#eef2ff" />
+                        <stop offset="100%" stop-color="#f0f7ff" />
+                      </linearGradient>
+                    </defs>
+                    <rect x="0" y="0" width="72" height="54" rx="8" fill="url(#phg8)" />
+                    <g transform="translate(12,10)" fill="#c7d7ff" opacity="0.95">
+                      <rect x="0" y="0" width="48" height="8" rx="3" />
+                      <rect x="0" y="12" width="32" height="6" rx="3" />
+                      <rect x="0" y="22" width="22" height="6" rx="3" />
+                    </g>
                   </svg>
-                </a>
-              </h4>
-              <p class="muted">Designed fact and dimension models for reporting and analytics.</p>
+                </div>
+                <div class="proj-content">
+                  <h4>Data Warehouse Design
+                    <a class="proj-icon" href="https://drive.google.com/drive/folders/1Em-8DnNQVa3PdoHdDLy82mt28FxjEOZv?usp=drive_link" target="_blank" rel="noopener" aria-label="Jump on Project: Data Warehouse Design" title="Jump on Project">
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                        <path d="M3 12a9 9 0 1 1 18 0 9 9 0 0 1-18 0z" fill="#0057D9" opacity="0.12"/>
+                        <path d="M12 7v10M7 12h10" stroke="#0057D9" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                      </svg>
+                    </a>
+                  </h4>
+                  <p class="muted">Designed fact and dimension models for reporting and analytics.</p>
+                </div>
+              </div>
             </article>
           </div>
         </section>
 
         <section id="tableau-projects" class="card mt-16">
-          <h2 style="margin-top:0">Tableau Projects</h2>
+          <h2 style="margin-top:0"><svg class="section-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect width="24" height="24" rx="4" fill="#e56a2f"/><g fill="#fff"><circle cx="7" cy="7" r="1.2"/><circle cx="12" cy="7" r="1.2"/><circle cx="17" cy="7" r="1.2"/><circle cx="7" cy="12" r="1.2"/><circle cx="12" cy="12" r="1.2"/><circle cx="17" cy="12" r="1.2"/><circle cx="10" cy="17" r="1.2"/><circle cx="14" cy="17" r="1.2"/></g></svg>Tableau Projects</h2>
           <p class="muted">Interactive visualizations and dashboards created in Tableau.</p>
           <div class="projects mt-12" aria-live="polite">
             <article class="proj" tabindex="0" data-title="Customer Segmentation Dashboard" data-desc="Tableau dashboard focused on segmentation and behavioural insights." data-tags="Tableau,Segmentation" data-link="https://drive.google.com/drive/folders/16u3_oxO9T9JTwaWxuwdj-VGELqVM3rjF?usp=drive_link">
-              <h4>Customer Segmentation Dashboard
-                <a class="proj-icon" href="https://drive.google.com/drive/folders/16u3_oxO9T9JTwaWxuwdj-VGELqVM3rjF?usp=drive_link" target="_blank" rel="noopener" aria-label="Jump on Project: Customer Segmentation Dashboard" title="Jump on Project">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                    <path d="M3 12a9 9 0 1 1 18 0 9 9 0 0 1-18 0z" fill="#0057D9" opacity="0.12"/>
-                    <path d="M12 7v10M7 12h10" stroke="#0057D9" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+              <div class="proj-row">
+                <div class="proj-thumb" data-thumb>
+                  <svg width="100%" height="100%" viewBox="0 0 72 54" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Project thumbnail placeholder">
+                    <defs>
+                      <linearGradient id="phg9" x1="0" y1="0" x2="1" y2="1">
+                        <stop offset="0%" stop-color="#eef2ff" />
+                        <stop offset="100%" stop-color="#f0f7ff" />
+                      </linearGradient>
+                    </defs>
+                    <rect x="0" y="0" width="72" height="54" rx="8" fill="url(#phg9)" />
+                    <g transform="translate(12,10)" fill="#c7d7ff" opacity="0.95">
+                      <rect x="0" y="0" width="48" height="8" rx="3" />
+                      <rect x="0" y="12" width="32" height="6" rx="3" />
+                      <rect x="0" y="22" width="22" height="6" rx="3" />
+                    </g>
                   </svg>
-                </a>
-              </h4>
-              <p class="muted">Segment-level insights and interactive filtering for stakeholders.</p>
+                </div>
+                <div class="proj-content">
+                  <h4>Customer Segmentation Dashboard
+                    <a class="proj-icon" href="https://drive.google.com/drive/folders/16u3_oxO9T9JTwaWxuwdj-VGELqVM3rjF?usp=drive_link" target="_blank" rel="noopener" aria-label="Jump on Project: Customer Segmentation Dashboard" title="Jump on Project">
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                        <path d="M3 12a9 9 0 1 1 18 0 9 9 0 0 1-18 0z" fill="#0057D9" opacity="0.12"/>
+                        <path d="M12 7v10M7 12h10" stroke="#0057D9" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                      </svg>
+                    </a>
+                  </h4>
+                  <p class="muted">Segment-level insights and interactive filtering for stakeholders.</p>
+                </div>
+              </div>
             </article>
           </div>
         </section>
 
         <section id="powerquery-projects" class="card mt-16">
-          <h2 style="margin-top:0">Power Query Projects</h2>
+          <h2 style="margin-top:0"><svg class="section-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect width="24" height="24" rx="4" fill="#8bc34a"/><path d="M6 4h12v2l-4 5v5l-4 2v-7L6 6V4z" fill="#fff"/></svg>Power Query Projects</h2>
           <p class="muted">Power Query transformations, merges and automation for Excel and Power BI.</p>
           <div class="projects mt-12" aria-live="polite">
             <article class="proj" tabindex="0" data-title="Data Cleanup Workflows" data-desc="Reusable Power Query functions and templates for routine data cleanup." data-tags="Power Query,Excel,Power BI" data-link="https://drive.google.com/drive/folders/11BFD-RUJnnfJmOBQ_zE7WSLmcWfpvSZt?usp=drive_link">
-              <h4>Data Cleanup Workflows
-                <a class="proj-icon" href="https://drive.google.com/drive/folders/11BFD-RUJnnfJmOBQ_zE7WSLmcWfpvSZt?usp=drive_link" target="_blank" rel="noopener" aria-label="Jump on Project: Data Cleanup Workflows" title="Jump on Project">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                    <path d="M3 12a9 9 0 1 1 18 0 9 9 0 0 1-18 0z" fill="#0057D9" opacity="0.12"/>
-                    <path d="M12 7v10M7 12h10" stroke="#0057D9" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-                  </svg>
-                </a>
-              </h4>
-              <p class="muted">Reusable query patterns to standardize and clean incoming data.</p>
+              <div class="proj-row">
+                <div class="proj-thumb" data-thumb></div>
+                <div class="proj-content">
+                  <h4>Data Cleanup Workflows
+                    <a class="proj-icon" href="https://drive.google.com/drive/folders/11BFD-RUJnnfJmOBQ_zE7WSLmcWfpvSZt?usp=drive_link" target="_blank" rel="noopener" aria-label="Jump on Project: Data Cleanup Workflows" title="Jump on Project">
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                        <path d="M3 12a9 9 0 1 1 18 0 9 9 0 0 1-18 0z" fill="#0057D9" opacity="0.12"/>
+                        <path d="M12 7v10M7 12h10" stroke="#0057D9" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                      </svg>
+                    </a>
+                  </h4>
+                  <p class="muted">Reusable query patterns to standardize and clean incoming data.</p>
+                </div>
+              </div>
             </article>
           </div>
         </section>
 
       </section>
+<!-- Testimonials & Clients -->
+<section id="social-proof" class="card mt-16">
+  <h2 style="margin-top:0">Testimonials</h2>
+  <p class="muted">What colleagues and clients say</p>
+  <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:12px; margin-top:12px">
+    <figure class="card" style="padding:12px">
+      <blockquote style="margin:0">"Mujassim delivered an outstanding Retail Insights dashboard — clear, timely, and with actionable KPIs."</blockquote>
+      <figcaption class="muted" style="margin-top:10px">— Sarah Rao, Head of Analytics</figcaption>
+    </figure>
+    <figure class="card" style="padding:12px">
+      <blockquote style="margin:0">"Reliable, detail oriented, and great communication. Reduced our monthly reporting time by 70%."</blockquote>
+      <figcaption class="muted" style="margin-top:10px">— Ajay Verma, Finance Manager</figcaption>
+    </figure>
+    <figure class="card" style="padding:12px">
+      <blockquote style="margin:0">"A pleasure to work with — scalable ETL pipelines and clear documentation."</blockquote>
+      <figcaption class="muted" style="margin-top:10px">— Priya Singh, Data Engineer</figcaption>
+    </figure>
+  </div>
+
+  <div style="margin-top:24px">
+    <h3 style="margin:0">Past workplaces & clients</h3>
+    <p class="muted">Trusted by</p>
+    <div style="display:flex; gap:16px; align-items:center; flex-wrap:wrap; margin-top:16px">
+
+      <!-- Client Logos / Names -->
+      <div style="padding:8px 16px; background:var(--card); border-radius:8px; 
+                  display:flex; align-items:center; justify-content:center; 
+                  box-shadow:0 6px 18px rgba(2,6,23,0.06)">
+        <span style="font-weight:600; color:#A400FF; white-space:nowrap">Sequential Tech International</span>
+      </div>
+
+      <div style="padding:8px 16px; background:var(--card); border-radius:8px; 
+                  display:flex; align-items:center; justify-content:center; 
+                  box-shadow:0 6px 18px rgba(2,6,23,0.06)">
+        <span style="font-weight:600; color:#00D4FF; white-space:nowrap">Rockerr Infrasolutions Pvt. Ltd</span>
+      </div>
+
+      <div style="padding:8px 16px; background:var(--card); border-radius:8px; 
+                  display:flex; align-items:center; justify-content:center; 
+                  box-shadow:0 6px 18px rgba(2,6,23,0.06)">
+        <span style="font-weight:600; color:#f2c94c; white-space:nowrap">Teleperformance</span>
+      </div>
+
+      <div style="padding:8px 16px; background:var(--card); border-radius:8px; 
+                  display:flex; align-items:center; justify-content:center; 
+                  box-shadow:0 6px 18px rgba(2,6,23,0.06)">
+        <span style="font-weight:600; color:#3776ab; white-space:nowrap">TTEC</span>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+      <!-- Blog / Insights (short posts) -->
+      <section id="insights" class="card mt-16">
+        <h2 style="margin-top:0">Insights & Blog</h2>
+        <p class="muted">Short, practical posts that show how I solve problems.</p>
+        <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:12px; margin-top:12px">
+          <article class="card" style="padding:12px">
+            <h3>How I automated Excel reports with Power Query</h3>
+            <p class="muted">I built a repeatable Power Query pipeline that consolidated and refreshed monthly reports — saving 8+ hours per month.</p>
+            <a href="#" class="navlink" style="margin-top:8px">Read more</a>
+          </article>
+          <article class="card" style="padding:12px">
+            <h3>Step-by-step SQL for data analysis</h3>
+            <p class="muted">A practical guide on using window functions, aggregates and common table expressions to answer business questions.</p>
+            <a href="#" class="navlink" style="margin-top:8px">Read more</a>
+          </article>
+          <article class="card" style="padding:12px">
+            <h3>Power BI: Designing dashboards that drive action</h3>
+            <p class="muted">Tips on KPI selection, color usage, and performance tuning to make dashboards useful for stakeholders.</p>
+            <a href="#" class="navlink" style="margin-top:8px">Read more</a>
+          </article>
+        </div>
+      </section>
+
+      <!-- Calendly lazy embed container (will be injected only on demand) -->
+      <div id="calendly-container" aria-live="polite" style="margin-top:18px"></div>
 
       <!-- Contact Section -->
-      <section id="contact" class="card mt-32">
-        <h2>Contact Me</h2>
-  <form id="contact-form" action="https://formsubmit.co/noormujassimraza@gmail.com" method="POST">
-          <input id="name" class="input" type="text" placeholder="Your name" aria-label="Name" required />
-          <input id="email" class="input" type="email" placeholder="Your email" aria-label="Email" required />
-          <textarea id="message" class="input" rows="5" placeholder="Message" aria-label="Message" required></textarea>
-    <!-- Honeypot to deter bots -->
-    <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
-    <!-- Prevent FormSubmit captcha and set subject -->
-    <input type="hidden" name="_captcha" value="false">
-    <input type="hidden" name="_subject" value="New contact via Umbrella InFo">
-    <!-- Optionally set a redirect after submit (you can change to your live URL) -->
-    <input type="hidden" name="_next" value="/">
-          <div class="form-row">
-            <button type="submit">Send message</button>
-            <div id="form-response" class="muted" aria-live="polite"></div>
-          </div>
-          <div class="contact-note">
-            <div style="display:flex; gap:8px; align-items:center">Call / WhatsApp: <a href="tel:+917617739344">+91-76177-39344</a>
-              <button id="copy-phone" class="tool-btn" title="Copy phone number" style="margin-left:6px">Copy</button>
+      <section id="contact" class="mt-32">
+        <div class="contact-grid single-column">
+          <!-- Project detail modal (single consolidated modal used for projects and lightbox) -->
+          <div id="projectModal" class="project-modal" role="dialog" aria-modal="true" aria-hidden="true">
+            <div class="modal-card" role="document">
+              <div class="modal-header">
+                <h3 id="modal-title" class="modal-title">Project title</h3>
+                <div>
+                  <button class="close" aria-label="Close dialog">✕</button>
+                </div>
+              </div>
+              <div class="modal-body">
+                <div style="display:flex; gap:16px; align-items:flex-start;">
+                  <div class="proj-thumb" data-thumb></div>
+                  <div style="flex:1">
+                    <div id="modal-desc" class="proj-body-text">Project description</div>
+                    <div id="modal-tags" class="modal-tools" style="margin-top:12px"></div>
+                  </div>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <div id="modal-cta" class="modal-footer-actions"></div>
+                <a class="btn modal-open-link" href="#" target="_blank" rel="noopener">Open project</a>
+              </div>
             </div>
-            <div style="margin-top:6px; display:flex; gap:8px; align-items:center">Or connect via email:
-              <button id="email-me" class="btn-outline" aria-label="Send email to Umbrella InFo">Send email</button>
-              <button id="copy-email" class="tool-btn" title="Copy email address">Copy</button>
-              <span class="muted" aria-hidden="true" style="margin-left:8px">(email hidden)</span>
-            </div>
           </div>
-        </form>
+
+          <!-- Contact details (expanded now that Connect card is removed) -->
+          <aside class="card" id="contact-details" aria-labelledby="contact-details-heading" style="grid-column:1/-1">
+            <h2 id="contact-details-heading">Contact Details</h2>
+
+            <div class="contact-avatar-wrap">
+              <img id="contact-avatar" src="assets/Mujassim.png" loading="lazy" decoding="async" alt="Photo of Mujassim Khan" class="contact-avatar" tabindex="0" role="button" aria-label="Open photo of Mujassim Khan" />
+              <div>
+                <div style="font-weight:700">Mujassim Khan</div>
+                <div class="muted">Data Analyst — Umbrella InFo</div>
+              </div>
+            </div>
+            <div style="margin-top:16px; line-height:1.6; font-weight:600">
+              <div id="contact-list" class="contact-list" style="margin:0">
+                <div class="contact-item" role="group" aria-label="Phone">
+                  <div class="icon">📞</div>
+                  <div class="meta">
+                    <div style="font-weight:700"><a id="phone-link" href="tel:+917617739344" style="color:inherit; text-decoration:none">+91-7617739344</a> <small style="color:var(--muted)"> (WhatsApp)</small></div>
+                  </div>
+                  <div class="contact-ctas">
+                    <a class="contact-cta" href="tel:+917617739344">Call Now</a>
+                    <a class="contact-cta" href="https://wa.me/917617739344" target="_blank" rel="noopener">WhatsApp Me</a>
+                  </div>
+                </div>
+
+                <div class="contact-item" role="group" aria-label="Email">
+                  <div class="icon">📧</div>
+                  <div class="meta">
+                    <div style="font-weight:700"><a id="email-link" href="mailto:noormujassimraza@gmail.com" style="color:inherit; text-decoration:none">noormujassimraza@gmail.com</a></div>
+                  </div>
+                  <div class="contact-ctas">
+                    <a class="contact-cta" href="mailto:noormujassimraza@gmail.com">Email Me</a>
+                  </div>
+                </div>
+
+                <div class="contact-item" role="group" aria-label="Location">
+                  <div class="icon">📍</div>
+                  <div class="meta">
+                    <div style="font-weight:700">Pilibhit, Uttar Pradesh, India</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </aside>
+        </div>
       </section>
     </main>
 
@@ -624,20 +1538,7 @@
     </footer>
   </div>
 
-  <!-- Modal for project details -->
-  <div class="modal" id="modal" role="dialog" aria-modal="true" aria-hidden="true">
-    <div class="panel" role="document">
-      <div class="modal-header">
-        <h3 id="modal-title" style="margin:0">Project</h3>
-        <button class="close" aria-label="Close" onclick="closeModal()">Close ✕</button>
-      </div>
-      <p id="modal-desc" class="muted"></p>
-  <div id="modal-tags"></div>
-    <div id="modal-cta" style="margin-top:12px"></div>
-  <div class="spacer-sm"></div>
-  <button class="btn btn-outline" onclick="closeModal()">Done</button>
-    </div>
-  </div>
+  <!-- consolidated modal: #projectModal above replaces the older generic modal -->
 
   <script>
     // Theme toggle logic
@@ -657,6 +1558,7 @@
     }
     // On load, set theme from localStorage; default to light when not set
     (function(){
+      // Calendly lazy loader: injects an iframe only when the user requests to schedule
       const saved = localStorage.getItem('theme');
       if(saved) {
         setTheme(saved);
@@ -699,6 +1601,8 @@
     }catch(err){ console.warn('nav enhancement failed', err); }
   })();
 
+  // Contact card equalization is handled via CSS Grid (grid-auto-rows:1fr + height:100%)
+
   // Ensure any .proj with a data-link has a visible compact Jump button
   (function(){
     try{
@@ -711,11 +1615,17 @@
         a.className = 'proj-icon'; a.href = link; a.target = '_blank'; a.rel = 'noopener noreferrer';
         a.setAttribute('aria-label', `Jump on Project: ${p.dataset.title || 'Project'}`);
         a.title = 'Jump on Project';
-        a.innerHTML = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M3 12a9 9 0 1 1 18 0 9 9 0 0 1-18 0z" fill="#0057D9" opacity="0.12"/><path d="M12 7v10M7 12h10" stroke="#0057D9" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+        a.innerHTML = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M3 12a9 9 0 1 1 18 0 9 9 0 0 1-18 0z" fill="#0057D9" opacity="0.12"/>
+          <path d="M12 7v10M7 12h10" stroke="#0057D9" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>`;
         h4.appendChild(a);
       });
     }catch(e){ console.warn('inject proj icons failed', e); }
   })();
+
+  // Calendly lazy-load: previously attached to a header button; kept here as a reference for future re-use.
+  // const calendlyUrl = 'https://calendly.com/noor-mujassim4626/30min';
 
   // Render skill proficiency dots from data-score attributes and support edit mode
   (function(){
@@ -833,6 +1743,33 @@
       // initial render and expose a small API
       render();
 
+      // Accessible announcer for focus changes (screen readers)
+      (function(){
+        let announcer = document.getElementById('skill-announcer');
+        if(!announcer){
+          announcer = document.createElement('div');
+          announcer.id = 'skill-announcer';
+          announcer.setAttribute('aria-live','polite');
+          announcer.setAttribute('aria-atomic','true');
+          announcer.style.position = 'absolute'; announcer.style.left='-9999px'; announcer.style.width='1px'; announcer.style.height='1px'; announcer.style.overflow='hidden';
+          document.body.appendChild(announcer);
+        }
+        // when a skill element receives focus via keyboard or hover, announce it
+        skills.forEach(s => {
+          // ensure skill is focusable (tabindex may already be set)
+          if(!s.hasAttribute('tabindex')) s.setAttribute('tabindex','0');
+          s.addEventListener('focusin', (e)=>{
+            s.classList.add('focused');
+            const name = s.querySelector('b')?.textContent?.trim() || s.getAttribute('data-key') || 'Skill';
+            const level = s.querySelector('.muted')?.textContent || '';
+            announcer.textContent = `${name} ${level}`;
+          });
+          s.addEventListener('focusout', ()=>{ s.classList.remove('focused'); });
+          // also announce on mouseenter for pointer users who prefer spoken feedback
+          s.addEventListener('mouseenter', ()=>{ const name = s.querySelector('b')?.textContent?.trim() || 'Skill'; announcer.textContent = name; });
+        });
+      })();
+
       // Export / Import handlers for skill levels
       const exportBtn = document.getElementById('export-skills');
       const importBtn = document.getElementById('import-skills');
@@ -854,67 +1791,13 @@
           try{
             const payload = buildExportPayload();
             const blob = new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' });
-            const name = `nm_skills_${payload.version}_${new Date().toISOString().slice(0,10)}.json`;
             const url = URL.createObjectURL(blob);
-            const a = document.createElement('a'); a.href = url; a.download = name; document.body.appendChild(a); a.click(); a.remove();
+            const a = document.createElement('a'); a.href = url; a.download = 'skills.json'; document.body.appendChild(a); a.click(); a.remove();
             setTimeout(()=> URL.revokeObjectURL(url), 5000);
-          }catch(err){
-            showToast('Failed to export skills: ' + (err && err.message ? err.message : err), 'error');
-          }
+            showToast('Sample JSON downloaded.', 'ok');
+          }catch(err){ showToast('Failed to create sample file', 'error'); }
         });
       }
-
-      if(importBtn && importFile){
-        importBtn.addEventListener('click', ()=> importFile.click());
-        importFile.addEventListener('change', (e)=>{
-          const f = importFile.files && importFile.files[0];
-          if(!f) return;
-          const reader = new FileReader();
-          reader.onload = function(ev){
-            try{
-              const parsed = JSON.parse(String(ev.target.result));
-              let incoming = parsed;
-              if(parsed && parsed.skills && typeof parsed.skills === 'object') incoming = parsed.skills;
-              if(typeof incoming !== 'object') throw new Error('Invalid file format');
-
-              const validated = {};
-              for(const k in incoming){
-                const v = Number(incoming[k]);
-                if(!Number.isFinite(v) || v < 0 || v > 5) throw new Error('Invalid score for ' + k);
-                validated[k] = v;
-              }
-
-              try{ localStorage.setItem(storageKey, JSON.stringify(validated)); }catch(e){}
-              saved = validated;
-              render();
-              showToast('Skills imported successfully.', 'ok');
-            }catch(err){
-              showToast('Failed to import skills: ' + (err && err.message ? err.message : err), 'error');
-            }finally{
-              importFile.value = '';
-            }
-          };
-          reader.onerror = function(){ showToast('Failed to read file', 'error'); importFile.value = ''; };
-          reader.readAsText(f);
-        });
-      }
-
-        // Download a sample import file (shows format)
-        const sampleBtn = document.getElementById('download-sample');
-        if(sampleBtn){
-          sampleBtn.addEventListener('click', ()=>{
-            try{
-              const payload = buildExportPayload();
-              const sample = { version: payload.version, skills: payload.skills, note: 'This is a sample file for importing skill levels.' };
-              const blob = new Blob([JSON.stringify(sample, null, 2)], { type: 'application/json' });
-              const name = `nm_skills_sample_${payload.version}.json`;
-              const url = URL.createObjectURL(blob);
-              const a = document.createElement('a'); a.href = url; a.download = name; document.body.appendChild(a); a.click(); a.remove();
-              setTimeout(()=> URL.revokeObjectURL(url), 5000);
-              showToast('Sample JSON downloaded.', 'ok');
-            }catch(err){ showToast('Failed to create sample file', 'error'); }
-          });
-        }
 
       window.nmSkills = { render, setEditMode };
     }catch(err){ console.warn('render proficiency failed', err); }
@@ -930,48 +1813,24 @@
     }catch(e){ console.warn('project wiring failed', e); }
   })();
 
-  // Contact form handler: POST to FormSubmit (formsubmit.co) with fetch and mailto fallback
+  // Contact form handler: keep native HTML submit for static hosts (FormSubmit works via normal POST)
   (function(){
     try{
       const form = document.getElementById('contact-form');
       const resp = document.getElementById('form-response');
       if(!form) return;
-      form.addEventListener('submit', async (e)=>{
-        e.preventDefault();
+      form.addEventListener('submit', (e)=>{
+        // Basic client-side validation only — let the browser/post endpoint handle the submit
         resp.textContent = '';
         const name = form.querySelector('#name').value.trim();
         const email = form.querySelector('#email').value.trim();
         const message = form.querySelector('#message').value.trim();
-        if(!name || !email || !message){ resp.textContent = 'Please fill in name, email and message.'; return; }
-
-        // Check honeypot
-        const honey = form.querySelector('input[name="_honey"]').value;
-        if(honey){ showToast('Bot detected — submission ignored', 'error'); return; }
-
-        const action = form.getAttribute('action');
-        const payload = new FormData(form);
-        try{
-          // Try POST via fetch so the page doesn't navigate
-          const res = await fetch(action, { method: 'POST', body: payload, mode: 'cors' });
-          if(res && (res.status === 200 || res.status === 302 || res.status === 201)){
-            showToast('Message sent — check your inbox for a confirmation.', 'ok');
-            form.reset();
-            return;
-          }
-          // If fetch returned a non-success status, fallthrough to mailto fallback
-        }catch(err){
-          // network or CORS failure
+        if(!name || !email || !message){
+          e.preventDefault();
+          resp.textContent = 'Please fill in name, email and message.';
+          return;
         }
-
-        // Fallback: open user's mail client with a prefilled message
-        try{
-          const subject = encodeURIComponent('Contact from Umbrella InFo: ' + name);
-          const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\n${message}`);
-          window.location.href = `mailto:noormujassimraza@gmail.com?subject=${subject}&body=${body}`;
-          showToast('No server response — opening mail client as fallback.', 'info');
-        }catch(e){
-          showToast('Failed to send message. Please email noormujassimraza@gmail.com directly.', 'error');
-        }
+        // Allow normal form POST to the action (FormSubmit) — no fetch, no mailto fallback
       });
     }catch(e){ console.warn('contact handler failed', e); }
   })();
@@ -990,31 +1849,14 @@
     }catch(e){ console.warn('email handler failed', e); }
   })();
 
-  // Clipboard helpers: copy phone/email with toast feedback
-  (function(){
-    try{
-      const phone = '+91-76177-39344';
-      const email = 'noormujassimraza@gmail.com';
-      const copy = async (text)=>{
-        if(navigator.clipboard && navigator.clipboard.writeText){
-          try{ await navigator.clipboard.writeText(text); showToast('Copied to clipboard', 'ok'); return true; }catch(e){}
-        }
-        // fallback
-        try{ const t = document.createElement('textarea'); t.value = text; document.body.appendChild(t); t.select(); document.execCommand('copy'); t.remove(); showToast('Copied to clipboard', 'ok'); return true;}catch(e){ showToast('Copy failed', 'error'); return false }
-      };
-      const cpPhone = document.getElementById('copy-phone');
-      const cpEmail = document.getElementById('copy-email');
-      if(cpPhone) cpPhone.addEventListener('click', ()=> copy(phone));
-      if(cpEmail) cpEmail.addEventListener('click', ()=> copy(email));
-    }catch(e){ console.warn('clipboard helper failed', e); }
-  })();
+  // Clipboard/reveal flows removed — contact actions now use direct tel:/mailto:/wa.me links
 
   // small helpers for modal and social links
   (function(){
     let lastFocused = null;
     function closeModal(){
       try{
-        const m = document.getElementById('modal'); if(!m) return;
+        const m = document.getElementById('projectModal'); if(!m) return;
         m.setAttribute('aria-hidden','true'); m.classList.remove('open');
         // restore focus
         if(lastFocused && lastFocused.focus) lastFocused.focus();
@@ -1022,11 +1864,11 @@
     }
     function openModal(title, desc, tags, link){
       try{
-        const m = document.getElementById('modal'); if(!m) return;
+        const m = document.getElementById('projectModal'); if(!m) return;
         lastFocused = document.activeElement;
-        document.getElementById('modal-title').textContent = title || 'Project';
-        document.getElementById('modal-desc').textContent = desc || '';
-  const tagWrap = document.getElementById('modal-tags'); tagWrap.innerHTML = '';
+        const titleEl = document.getElementById('modal-title'); if(titleEl) titleEl.textContent = title || 'Project';
+        const descEl = document.getElementById('modal-desc'); if(descEl) descEl.textContent = desc || '';
+  const tagWrap = document.getElementById('modal-tags'); if(tagWrap) tagWrap.innerHTML = '';
         (tags||'').toString().split(',').filter(Boolean).forEach(t=>{ const d = document.createElement('div'); d.className='tag'; d.textContent = t.trim(); tagWrap.appendChild(d); });
   m.classList.add('open'); m.setAttribute('aria-hidden','false');
   // render optional CTA when a link is provided
@@ -1042,8 +1884,8 @@
       a.appendChild(svg);
       const span = document.createElement('span'); span.textContent = 'Jump on Project'; a.appendChild(span);
       cta.appendChild(a); } }
-        // move focus to close button
-        const closeBtn = m.querySelector('.close'); if(closeBtn) closeBtn.focus();
+  // move focus to close button
+  const closeBtn = m.querySelector('.close'); if(closeBtn) closeBtn.focus();
 
         // trap focus inside modal
         function trap(e){
@@ -1057,8 +1899,8 @@
           }
           if(e.key === 'Escape') { closeModal(); }
         }
-        m.__trap = trap;
-        document.addEventListener('keydown', trap);
+  m.__trap = trap;
+  document.addEventListener('keydown', trap);
       }catch(e){ console.warn(e); }
     }
     // expose
@@ -1120,6 +1962,53 @@
     }catch(e){ console.warn('logo swap failed', e); }
   })();
 
+  // Lightbox for contact avatar: reuse existing #modal to display larger photo
+  (function(){
+    try{
+  const avatar = document.getElementById('contact-avatar');
+  const modal = document.getElementById('projectModal');
+  if(!avatar || !modal) return;
+  const modalTitle = document.getElementById('modal-title');
+  const modalDesc = document.getElementById('modal-desc');
+  const modalTags = document.getElementById('modal-tags');
+  const modalCta = document.getElementById('modal-cta');
+      let lastFocus = null;
+
+      function openPhotoLightbox(){
+        lastFocus = document.activeElement;
+        modalTitle.textContent = 'Mujassim Khan — Photo';
+        modalDesc.textContent = '';
+        // clear tags and CTA
+        if(modalTags) modalTags.innerHTML = '';
+        if(modalCta) modalCta.innerHTML = '';
+        // place image into modal-desc area as a responsive element
+        modalDesc.innerHTML = '';
+        const img = document.createElement('img');
+        img.src = avatar.src;
+        img.alt = 'Photo of Mujassim Khan';
+        img.style.width = '100%'; img.style.height = 'auto'; img.style.borderRadius = '8px';
+        modalDesc.appendChild(img);
+  modal.classList.add('open'); modal.setAttribute('aria-hidden','false');
+        // focus close button
+        const closeBtn = modal.querySelector('.close'); if(closeBtn) closeBtn.focus();
+      }
+
+      function closePhotoLightbox(){
+        modal.classList.remove('open'); modal.setAttribute('aria-hidden','true');
+        if(lastFocus && typeof lastFocus.focus === 'function') lastFocus.focus();
+      }
+
+      avatar.addEventListener('click', (e)=>{ e.preventDefault(); openPhotoLightbox(); });
+      avatar.addEventListener('keydown', (e)=>{ if(e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openPhotoLightbox(); } });
+
+      // Ensure modal close restores focus for this flow
+  const closeButtons = modal.querySelectorAll('.close');
+  closeButtons.forEach(b=> b.addEventListener('click', closePhotoLightbox));
+  modal.addEventListener('click', (ev)=>{ if(ev.target === modal) closePhotoLightbox(); });
+  document.addEventListener('keydown', (ev)=>{ if(ev.key === 'Escape' && modal.classList.contains('open')) closePhotoLightbox(); });
+    }catch(e){ console.warn('avatar lightbox failed', e); }
+  })();
+
   // Simple visit counter (local only)
   (function(){
     try{
@@ -1136,6 +2025,174 @@
     }catch(e){ }
   })();
 
+  // IntersectionObserver: reveal cards and project tiles on scroll with a subtle stagger
+  (function(){
+    /*
+      Reveal helper
+      - Adds .reveal-enabled to <html> so animation CSS is applied only when JS runs
+      - Respects prefers-reduced-motion: if set, content is revealed immediately
+      - Fallback: if IntersectionObserver missing, immediately reveal all content
+      - Page-load cascade: briefly stagger the first N visible `.card` elements for a pleasant initial load
+      Accessibility: animations will not hide content; reduced-motion users get no motion and all elements are revealed instantly.
+    */
+    try{
+      try{ document.documentElement.classList.add('reveal-enabled'); }catch(e){}
+
+      const cfg = {
+        cardStaggerMs: 80,    // used for page-load cascade between top N cards
+        childStaggerMs: 60,   // used when revealing child .proj items inside a card
+        initialCascadeCount: 6 // how many top-level cards get revealed in a page-load cascade
+      };
+
+      const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const reveal = (el) => { if(!el) return; el.classList.add('in-view'); };
+
+      // If user prefers reduced motion, reveal everything immediately (no transitions)
+      if(prefersReduced){ document.querySelectorAll('.card, .proj').forEach(reveal); return; }
+
+      // If IntersectionObserver is not supported, reveal immediately (graceful fallback)
+      if(typeof IntersectionObserver === 'undefined'){
+        document.querySelectorAll('.card, .proj').forEach(reveal);
+        return;
+      }
+
+      // Page-load cascade for the first few cards to give a pleasant initial animation
+      try{
+        const topCards = Array.from(document.querySelectorAll('.card')).slice(0, cfg.initialCascadeCount);
+        topCards.forEach((c, i)=> setTimeout(()=> {
+          reveal(c);
+          // reveal children within this card with a small stagger
+          const children = Array.from(c.querySelectorAll('.proj'));
+          children.forEach((ch, j)=> setTimeout(()=> reveal(ch), j * cfg.childStaggerMs));
+        }, i * cfg.cardStaggerMs));
+      }catch(e){ /* non-fatal */ }
+
+      const options = { root: null, rootMargin: '0px 0px -8% 0px', threshold: 0.12 };
+      const observer = new IntersectionObserver((entries, obs)=>{
+        entries.forEach(entry=>{
+          if(entry.isIntersecting){
+            const el = entry.target;
+            // reveal the element
+            reveal(el);
+            // For card containers, reveal child .proj elements with a small stagger
+            if(el.classList.contains('card')){
+              const children = Array.from(el.querySelectorAll('.proj'));
+              children.forEach((c, i)=> setTimeout(()=> reveal(c), i * cfg.childStaggerMs));
+            }
+            obs.unobserve(el);
+          }
+        });
+      }, options);
+
+      // observe top-level cards and standalone project tiles
+      document.querySelectorAll('.card, .proj').forEach(n=> observer.observe(n));
+    }catch(e){ console.warn('reveal observer failed', e); }
+  })();
+
+  </script>
+  <script>
+    // Sticky-aside guard: when the footer becomes visible, stop the aside being sticky
+    (function(){
+      try{
+        const aside = document.querySelector('aside');
+        const footer = document.querySelector('footer');
+        if(!aside || !footer) return;
+        // Respect reduced-motion by avoiding toggles if user prefers reduced motion
+        const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        const io = new IntersectionObserver((entries)=>{
+          entries.forEach(en=>{
+            if(en.isIntersecting){
+              aside.classList.add('unstuck');
+            } else {
+              aside.classList.remove('unstuck');
+            }
+          });
+        }, { root: null, threshold: 0, rootMargin: '0px 0px -2px 0px' });
+        if(!prefersReduced) io.observe(footer);
+      }catch(e){ /* non-fatal */ }
+    })();
+  </script>
+  <script>
+    // Insert small tech icons into each project thumbnail based on data-tags (supports multiple icons)
+      (function(){
+        try{
+          // Returns an element sized for thumbnails with inline SVG for each tech
+          const iconFor = (key)=>{
+            // normalized key
+            const k = key.toLowerCase().trim();
+            // small SVG icons with background color matching skill
+            switch(true){
+              case /power\s?bi/.test(k): return `<div class="tech-icon" title="Power BI" style="background:#f2c94c"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect x="5.2" y="13" width="2" height="6" rx="0.5" fill="#111"/><rect x="9.2" y="9" width="2" height="10" rx="0.5" fill="#111"/><rect x="13.2" y="6" width="2" height="13" rx="0.5" fill="#111"/><rect x="17.2" y="3" width="2" height="16" rx="0.5" fill="#111"/></svg></div>`;
+              case /python/.test(k): return `<div class="tech-icon" title="Python" style="background:#3776ab"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M7.5 6.5c1.2-1 3.6-1 4.8 0 .6.5.6 1.6 0 2.1-.5.4-1.2.5-1.8.4-.6-.1-1.1-.6-1.4-1.1-.3-.5-.4-1.1 0-1.4z" fill="#ffd43b"/><path d="M16.5 17.5c-1.2 1-3.6 1-4.8 0-.6-.5-.6-1.6 0-2.1.5-.4 1.2-.5 1.8-.4.6.1 1.1.6 1.4 1.1.3.5.4 1.1 0 1.4z" fill="#ffd43b"/></svg></div>`;
+              case /tableau/.test(k): return `<div class="tech-icon" title="Tableau" style="background:#e56a2f"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><g fill="#fff"><circle cx="7" cy="7" r="1.2"/><circle cx="12" cy="7" r="1.2"/><circle cx="17" cy="7" r="1.2"/><circle cx="7" cy="12" r="1.2"/><circle cx="12" cy="12" r="1.2"/><circle cx="17" cy="12" r="1.2"/><circle cx="10" cy="17" r="1.2"/><circle cx="14" cy="17" r="1.2"/></g></svg></div>`;
+              case /power\s?query/.test(k): return `<div class="tech-icon" title="Power Query" style="background:#8bc34a"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M6 4h12v2l-4 5v5l-4 2v-7L6 6V4z" fill="#fff"/></svg></div>`;
+              case /excel/.test(k): return `<div class="tech-icon" title="Excel" style="background:#217346"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><g fill="#fff"><rect x="4" y="5" width="5" height="5" rx="0.6"/><rect x="10" y="5" width="5" height="5" rx="0.6"/><rect x="4" y="11" width="5" height="5" rx="0.6"/><rect x="10" y="11" width="5" height="5" rx="0.6"/></g></svg></div>`;
+              case /ms\s?sql/.test(k):
+              case /sql/.test(k): return `<div class="tech-icon" title="SQL Server" style="background:#2b6cb0"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><g fill="#fff"><ellipse cx="12" cy="7.2" rx="6" ry="2.1"/><path d="M6 7.2v5.6c0 1.1 2.7 2 6 2s6-.9 6-2V7.2"/></g></svg></div>`;
+              default: return '';
+            }
+          };
+
+          document.querySelectorAll('.proj').forEach(p=>{
+            const raw = (p.getAttribute('data-tags')||'').toString();
+            if(!raw) return;
+            const parts = raw.split(',').map(s=>s.trim()).filter(Boolean);
+            if(parts.length === 0) return;
+            const thumb = p.querySelector('.proj-thumb');
+            if(!thumb) return;
+            // avoid duplicate insertion
+            if(thumb.querySelector('.thumb-icons')) return;
+            const wrap = document.createElement('div'); wrap.className = 'thumb-icons';
+            parts.forEach(tag => {
+              const html = iconFor(tag);
+              if(html) {
+                const tmp = document.createElement('div'); tmp.innerHTML = html; wrap.appendChild(tmp.firstElementChild);
+              }
+            });
+            if(wrap.children.length) thumb.appendChild(wrap);
+          });
+
+          // Update modal population for both modal implementations to include icons
+          function iconsForTags(raw){
+            const parts = (raw||'').toString().split(',').map(s=>s.trim()).filter(Boolean);
+            const container = document.createElement('div'); container.className = 'modal-icons';
+            parts.forEach(tag => { const html = iconFor(tag); if(html){ const tmp = document.createElement('div'); tmp.innerHTML = html; const el = tmp.firstElementChild; el.style.width='36px'; el.style.height='28px'; container.appendChild(el); } });
+            return container;
+          }
+
+          // Hook into existing modal population used earlier in the file (projectModal)
+          const modal = document.getElementById('projectModal');
+          if(modal){
+            const origOpen = window.openModalProject || null;
+            // Find where the openModal in that scope populates modal-tags / modal-tools; we'll append icons when show
+            // We can't reach the internal function easily; instead observe attribute changes on modal when it is shown and update icons
+            const obs = new MutationObserver(()=>{
+              try{
+                const title = modal.querySelector('.modal-title');
+                const tagWrap = modal.querySelector('.modal-tags');
+                if(!tagWrap) return;
+                // avoid duplicate icons
+                if(tagWrap.querySelector('.modal-icons')) return;
+                const thumb = modal.querySelector('[data-thumb]');
+                // read tags from the thumbnail img (if present) or the modal-tags text
+                const sourceTags = (modal.__sourceTags || '') || (tagWrap.textContent || '').toString() || modal.getAttribute('data-tags') || '';
+                const icons = iconsForTags(sourceTags);
+                if(icons && icons.children.length){ tagWrap.parentNode.insertBefore(icons, tagWrap.nextSibling); }
+              }catch(e){}
+            });
+            obs.observe(modal, { attributes: true, childList: true, subtree: true });
+          }
+
+        }catch(e){ console.warn('tech icon injection failed', e); }
+      })();
+  </script>
+  <script>
+    // Make tag chips keyboard-focusable so :focus styles activate for keyboard users
+    (function(){
+      try{
+        document.querySelectorAll('.tag').forEach(t=>{ if(!t.hasAttribute('tabindex')) t.setAttribute('tabindex','0'); });
+      }catch(e){ console.warn('make tags focusable failed', e); }
+    })();
   </script>
   </body>
   </html>

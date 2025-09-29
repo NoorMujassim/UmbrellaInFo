@@ -4,9 +4,11 @@
   "private": true,
   "scripts": {
     "check-assets": "node ./scripts/check-assets.js",
-    "audit-a11y": "npx pa11y-ci --config=pa11yci.json || true"
+    "audit-a11y": "npx pa11y-ci --config=pa11yci.json || true",
+    "convert-icons": "node scripts/convert-icons.js"
   },
   "devDependencies": {
-    "pa11y-ci": "^6.0.0"
+    "pa11y-ci": "^6.0.0",
+    "sharp": "^0.32.0"
   }
 }

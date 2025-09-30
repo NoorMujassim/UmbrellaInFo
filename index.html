@@ -604,6 +604,14 @@
       }
       /* hover/active accent for contact cards */
       .contact-grid > .card:hover{ transform: translateY(-6px); box-shadow: 0 28px 60px rgba(2,6,23,0.14); border-color: rgba(255,177,0,0.10); }
+      /* Pop-up animation for testimonial cards on hover */
+      #social-proof figure.card {
+        transition: transform .2s ease, box-shadow .2s ease;
+      }
+      #social-proof figure.card:hover {
+        transform: translateY(-5px) scale(1.02);
+        box-shadow: 0 12px 24px rgba(2,6,23,0.1);
+      }
   /* title styling inside contact cards */
   #connect-me h2, #contact-details h2{ margin:0 0 8px; font-size:20px; display:flex; align-items:center; gap:10px }
       /* small decorative dot to the left of the heading */

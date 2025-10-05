@@ -47,6 +47,9 @@
   --bg-gradient: linear-gradient(180deg,#121212 0%, #0f0f10 60%);
   color-scheme: dark;
 }
+[data-theme="dark"] .proj-thumb {
+  background: linear-gradient(135deg, #1a1f2e, #252a3a);
+}
 
 /* ============================================
    2. BASE & RESET
@@ -415,7 +418,9 @@ button.navlink.btn-gradient {
   margin-top:12px; display:flex; gap:8px; flex-wrap:wrap;
 }
 .project-modal .modal-tags .tag {
-  background:#f1f5f9; padding:6px 10px; border-radius:8px; font-size:13px; color:#374151;
+  background: var(--glass);
+  color: var(--text);
+  border: 1px solid var(--sep); padding:6px 10px; border-radius:8px; font-size:13px;
 }
 .project-modal .modal-close, .close {
   background:transparent; border:0; font-size:18px; cursor:pointer; padding:8px; border-radius:8px; font-weight:700; color:var(--muted);
@@ -542,13 +547,18 @@ button.navlink.btn-gradient {
   outline:2px solid rgba(0,87,217,0.12);
 }
 .proj-thumb {
-  width:72px;height:54px;border-radius:8px;flex:0 0 72px;background:linear-gradient(135deg,#eef2ff,#f0f7ff);display:inline-block;margin-right:12px;align-self:center;overflow:hidden; position:relative;
+  width:72px;height:54px;border-radius:8px;flex:0 0 72px;background:linear-gradient(135deg,#eef2ff,#f0f7ff);display:flex;align-items:center;justify-content:center;margin-right:12px;align-self:center;overflow:hidden; position:relative;
 }
 .proj-row {
   display:flex;align-items:flex-start;gap:12px;
 }
 .proj-row .proj-content {
   flex:1;
+}
+.proj-thumb svg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 /* --- Category-specific Project Cards --- */
@@ -609,6 +619,21 @@ button.navlink.btn-gradient {
 }
 .contact a {
   display:block; text-decoration:none; color:inherit; background:rgba(255,255,255,0.02); padding:12px; border-radius:10px;
+}
+.contact-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.contact-item {
+  display: grid;
+  grid-template-columns: 40px 1fr;
+  gap: 12px;
+  align-items: start;
+  padding: 12px;
+  border-radius: 10px;
+  background: var(--glass);
+  border: 1px solid var(--sep);
 }
 .contact-ctas {
   display:flex; gap:10px; margin-top:8px; flex-wrap:wrap; align-items:center;
@@ -877,6 +902,14 @@ button[type="submit"] {
     grid-template-columns: 1fr; /* Full width on mobile */
   }
 
+  .contact-item {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+  .contact-ctas {
+    justify-content: center;
+  }
+
   /* Modal */
   .project-modal .modal-card {
     padding:14px;
@@ -901,5 +934,23 @@ button[type="submit"] {
   }
   .skill .score-num {
     display:inline-block;
+  }
+}
+
+@media (pointer: coarse) { /* Touch devices */
+  .navlink,
+  .btn,
+  .contact-cta {
+    min-height: 44px;
+    min-width: 44px;
+    padding: 12px 16px;
+  }
+  
+  .proj {
+    padding: 16px;
+  }
+  
+  .skill {
+    padding: 14px;
   }
 }
